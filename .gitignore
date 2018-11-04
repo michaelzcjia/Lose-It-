@@ -1,0 +1,8 @@
+.idea
+.xml
+.iml
+.pyc
+static/.DS_Store
+runtime.txt
+requirements.txt
+__pycache__/todo_db.cpython-36.pyc
