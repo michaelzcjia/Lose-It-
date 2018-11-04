@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Account</title>
+
+</head>
+<body>
+    <div class="pageframe">
+        <div class="addtask">
+            <form action="/addAccount">
+                Create an Account:<br>
+                <input type="text" name="name" placeholder="Name" size=25 class="add-textbox">
+                <input type="text" name="age" placeholder="Age" size=25 class="add-textbox">
+                <input type="text" name="sex" placeholder="Sex" size=25 class="add-textbox">
+                <input type="text" name="user" placeholder="Username" size=25 class="add-textbox">
+                <input type="text" name="password" placeholder="Password" size=25 class="add-textbox">
+                <br>
+                {%if userTaken%}
+                    <p>Sorry, this user already exists!</p>
+                <input type="submit" class="add-button" value="Login">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+	<!DOCTYPE html>
+<html>
+<head>
+	<title>To Do List</title>
+	<link rel="stylesheet" href="static/css/todolist.css">
+</head>
+<body>
+	<center>
+		<div class="pageframe">
+			<div class="header">
+				My To Do List
+			</div>
+			<div class="addtask">
+				<form action="/add">
+					Add to list:
+					<input type="text" name="title" placeholder="Write your text here" size=25 class="add-textbox">
+					<input type="submit" class="add-button" value="Add task">
+			 	</form>
+			</div>	
+
+	{% if task_list %}
+		<ul id="myUL">
+		{% for task in task_list%}
+			{% if not task.done %}
+				<li><a href="/set_done/{{ task.task_id}}">{{ task.task }}</a> <a href="/remove_task/{{ task.task_id}}" class="remove-link">[remove]</a></li>
+			{% else %}
+				<li class="done"><a href="/set_not_done/{{ task.task_id}}">{{ task.task }}</a> <a href="/remove_task/{{ task.task_id}}" class="remove-link">[remove]</a></li>
+			{% endif %}
+		{% endfor %}
+		</ul>
+	{% else %}
+			<div> Todo list is empty. Please add some tasks.</div>
+	{% endif %}
+		</div>
+	</center>
+</body>
+</html>
