@@ -29,12 +29,20 @@ def initialize_db(db_path):
 
 def verifyLogin(db_conn,user,password):
 	results = ""
-	# results = db_conn.execute("SELECT * FROM ACCOUNTS WHERE USER = {} AND PASSWORD = {}".format(user,password))
+	results = db_conn.execute("SELECT Username FROM Account WHERE Username = '{}' AND Password = '{}'".format(user,password))
 	flag = False
 
 	# if results not empty:
-	if len(results) >= 1:
+	if len(results) > 0:
 		flag = True
+	# try:
+	# 	print("trying")
+	# 	for i in result
+	# 	print("Triedit")
+	# 	flag = True
+	# except Exception:
+	# 	flag = False
+	# 	print("big oops")
 	return flag
 
 def get_tasks(db_conn):
@@ -51,6 +59,13 @@ def add_task(db_conn, task):
 	if not task:
 		return
 	sqlInsert = "INSERT INTO todo (task, done) VALUES ('{}', 0)".format(task)
+	db_conn.execute(sqlInsert)
+	db_conn.commit()
+
+def insert_random(db_conn):
+	print("@@@@@@@@@@")
+	sqlInsert = "INSERT INTO Account (a_id, first_name, last_name,age,sex,weight,username,password,maintenance)" \
+				"values ('00000001','first','last',5,'M','10','user','pass','123')"
 	db_conn.execute(sqlInsert)
 	db_conn.commit()
 

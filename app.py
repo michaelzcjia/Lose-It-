@@ -4,14 +4,14 @@ import todo_db
 
 
 # Define a path for the database
-DATABASE_PATH = "db.db"
+DATABASE_PATH = "data.sqlite"
 
 # create a Flask app
 app = Flask(__name__)
 
 def get_db_conn():
     if not hasattr(g, "_db_conn"):
-        g._db_conn = todo_db.initialize_db("db.db")
+        g._db_conn = todo_db.initialize_db(DATABASE_PATH)
     return g._db_conn
 
 # Welcome page. Accessible at <server-address>/
@@ -66,8 +66,11 @@ def verifyLogin():
     user = request.args.get('user')
     password = request.args.get('password')
     db_conn = get_db_conn()
+#Call test
+    # todo_db.insert_random(db_conn)
+
     if todo_db.verifyLogin(db_conn,user,password):
-        return redirect("/ViewWorkout")  # for now it forces to this
+        return render_template("/viewWorkout.html")  # for now it forces to this
     return render_template("/main.html",failLogin=True)
         #Performs a function where it looks for a row that contains the user and password above
     #If the function returns 0 counts, prompts user that login or p/w or both were invalid
