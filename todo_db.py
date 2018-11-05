@@ -15,6 +15,11 @@ class Task(object):
 		self.task = task
 		self.done = done
 
+class Account(object):
+	def __init__(self, acc_id, user, pw):
+		self.acc_id = acc_id
+		self.user = user
+		self.pw = pw
 
 def initialize_db(db_path):
 	conn = sqlite3.connect(db_path)
@@ -22,6 +27,15 @@ def initialize_db(db_path):
 	conn.commit()
 	return conn
 
+def verifyLogin(db_conn,user,password):
+	results = ""
+	# results = db_conn.execute("SELECT * FROM ACCOUNTS WHERE USER = {} AND PASSWORD = {}".format(user,password))
+	flag = False
+
+	# if results not empty:
+	if len(results) >= 1:
+		flag = True
+	return flag
 
 def get_tasks(db_conn):
 	results = db_conn.execute("SELECT task_id, task, done FROM todo;")
