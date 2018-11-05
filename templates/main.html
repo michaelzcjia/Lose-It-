@@ -21,6 +21,9 @@
 					<input type="text" name="user" placeholder="Username" size=25 class="add-textbox">
 					<input type="password" name="password" placeholder="Password" size=25 class="add-textbox">
 					<br>
+					{%if failLogin:%}
+						<p>Incorrect Username and Password</p>
+					{% endif %}
 					<input type="submit" class="add-button" value="Login">
 				</form>
 			</div>
