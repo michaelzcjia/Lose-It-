@@ -34,7 +34,8 @@ def create_page():
 def view_page():
     return render_template('ViewWorkout.html')
 
-""""# Todo list page. Accessible at <server-address>/todo
+"""" Todo list page. Accessible at <server-address>/todo
+
 @app.route('/todo')
 def todo_list():
 	db_conn = get_db_conn()
