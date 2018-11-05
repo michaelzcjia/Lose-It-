@@ -17,21 +17,69 @@ def get_db_conn():
 # Welcome page. Accessible at <server-address>/
 @app.route('/')
 def welcome_page():
-	return render_template('main.html')
+    return render_template('main.html')
 
-# Todo list page. Accessible at <server-address>/todo
+# Create Account page. Accessible at <server-address>/
+@app.route('/createAccount')
+def account_page():
+    return render_template('CreateAccount.html')
+
+# Create Workout Plan Page. Accessible at <server-address>/
+@app.route('/createWorkout')
+def create_page():
+    return render_template('CreateWorkout.html')
+
+# Create Workout Plan Page. Accessible at <server-address>/
+@app.route('/viewWorkout')
+def view_page():
+    return render_template('ViewWorkout.html')
+
+"""" Todo list page. Accessible at <server-address>/todo
+
 @app.route('/todo')
 def todo_list():
 	db_conn = get_db_conn()
 	task_list = todo_db.get_tasks(db_conn)
-	return render_template('todolist.html', task_list=task_list)
+	return render_template('todolist.html', task_list=task_list) """
 
-@app.route('/verifyLogin',methods=['GET'])
+# Handles account creation task. The task details are submitted by HTML Form
+# This function extracts the account details and login information and calls the addAccount function to add the info into the database
+@app.route('/addAccount', methods=['GET'])
+def addAccount():
+    name = request.args.get('name')
+    age = request.args.get('age')
+    sex = request.args.get('sex')
+    user = request.args.get('user')
+    password = request.args.get('password')
+    db_conn = get_db_conn()
+
+    #Performs a function where it looks for a row that contains the user above
+    #If the function returns 0 counts, prompts user that login already exists and redirect back to page with error message (define UserTaken as TRUE)
+    #If user doesnt exist, redirect to createworkoutplan page
+
+
+
+# Handles login task request. The task details are submitted by a HTML form with an action:
+# This function extracts the inputted login and password and calls the verify_login function
+@app.route('/verifyLogin', methods=['GET'])
 def verifyLogin():
-	db_conn = get_db_conn()
-	return render_template('viewWorkout.html')
+    user = request.args.get('user')
+    password = request.args.get('password')
+    db_conn = get_db_conn()
+
+    #Performs a function where it looks for a row that contains the user and password above
+    #If the function returns 0 counts, prompts user that login or p/w or both were invalid
+        #then: return redirect("/createAccount")
+
+    #if workout plan created
+    return redirect("/ViewWorkout") # for now it forces to this
+    #if no workout plan created
+        #return redirect("/createWorkout")
+
+
 # Handles add task request. The task details are submitted by a HTML form with an action="/add".
-# This function extract the form field "title" and callls the app function add_task
+# This function extract the form field "title" and calls the app function add_task
+
 @app.route('/add', methods=['GET'])
 def add_task():
 	task_title = request.args.get('title')
