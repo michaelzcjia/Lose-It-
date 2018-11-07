@@ -46,9 +46,11 @@ def todo_list():
 # This function extracts the account details and login information and calls the addAccount function to add the info into the database
 @app.route('/addAccount', methods=['GET'])
 def addAccount():
-    name = request.args.get('name')
+    fname = request.args.get('fname')
+    lname = request.args.get('lname')
     age = request.args.get('age')
     sex = request.args.get('sex')
+    weight = request.args.get('weight')
     user = request.args.get('user')
     password = request.args.get('password')
     db_conn = get_db_conn()
@@ -56,8 +58,9 @@ def addAccount():
     #Performs a function where it looks for a row that contains the user above
     #If the function returns 0 counts, prompts user that login already exists and redirect back to page with error message (define UserTaken as TRUE)
     #If user doesnt exist, redirect to createworkoutplan page
-
-
+    if todo_db.addAccount(db_conn,fname,lname,age,sex,weight,user,password):
+        return render_template('/viewWorkout.html')
+    return render_template("/createAccount.html",userTaken = True)
 
 # Handles login task request. The task details are submitted by a HTML form with an action:
 # This function extracts the inputted login and password and calls the verify_login function
@@ -66,20 +69,15 @@ def verifyLogin():
     user = request.args.get('user')
     password = request.args.get('password')
     db_conn = get_db_conn()
-#Call test
-    # todo_db.insert_random(db_conn)
 
     if todo_db.verifyLogin(db_conn,user,password):
         return render_template("/viewWorkout.html")  # for now it forces to this
     return render_template("/main.html",failLogin=True)
-        #Performs a function where it looks for a row that contains the user and password above
-    #If the function returns 0 counts, prompts user that login or p/w or both were invalid
-        #then: return redirect("/createAccount")
 
-    #if workout plan created
-    #if no workout plan created
-        #return redirect("/createWorkout")
-
+@app.route('/checkAccounts')
+def checkAccounts():
+    todo_db.checkAccounts(get_db_conn())
+    return render_template("/main.html")
 
 # Handles add task request. The task details are submitted by a HTML form with an action="/add".
 # This function extract the form field "title" and calls the app function add_task

@@ -28,22 +28,36 @@ def initialize_db(db_path):
 	return conn
 
 def verifyLogin(db_conn,user,password):
-	results = ""
+	#Returns a cursor type opject that is an iterable of tupples of rows from query
 	results = db_conn.execute("SELECT Username FROM Account WHERE Username = '{}' AND Password = '{}'".format(user,password))
-	flag = False
 
-	# if results not empty:
-	if len(results) > 0:
-		flag = True
-	# try:
-	# 	print("trying")
-	# 	for i in result
-	# 	print("Triedit")
-	# 	flag = True
-	# except Exception:
-	# 	flag = False
-	# 	print("big oops")
-	return flag
+	#Returns false is no matches for user and pass in database, true if account exists
+	if results.fetchone() == None:
+		return False
+	else:
+		return True
+
+def checkAccounts(db_conn):
+	results = db_conn.execute("SELECT * FROM ACCOUNT")
+	for i in results:
+		print(i)
+
+def addAccount(db_conn,fn,ln,age,sex,weight,user,pw):
+	age2 = int(age)
+	weight2 = int(weight)
+	count = db_conn.execute("SELECT COUNT(*) FROM ACCOUNT")
+	try:
+		count = count.fetchone()
+	except:
+		count = 0
+	try:
+		statement = "INSERT INTO ACCOUNT (a_id, first_name, last_name,age,sex,weight,username,password,maintenance) " \
+					"VALUES ('{}','{}','{}',{},'{}',{},'{}','{}',{})".format(count,fn,ln,age2,sex,weight2,user,pw,123)
+		db_conn.execute(statement)
+		db_conn.commit()
+	except Exception:
+		return False
+	return True
 
 def get_tasks(db_conn):
 	results = db_conn.execute("SELECT task_id, task, done FROM todo;")
