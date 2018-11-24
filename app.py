@@ -75,6 +75,7 @@ def verifyLogin():
 
     if todo_db.verifyLogin(db_conn,user,password):
         global curr_user
+        curr_user = todo_db.get_user(db_conn,user,password)
         if curr_user.has_workout:
             return render_template("/viewWorkout.html",fname = curr_user.fname)  # for now it forces to this
         else:
