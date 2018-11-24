@@ -2,7 +2,7 @@
 from flask import Flask, render_template, request, redirect, g
 import todo_db
 
-
+curr_user = 'Ratthew'
 # Define a path for the database
 DATABASE_PATH = "data.sqlite"
 
@@ -32,7 +32,8 @@ def create_page():
 # Create Workout Plan Page. Accessible at <server-address>/
 @app.route('/viewWorkout')
 def view_page():
-    return render_template('ViewWorkout.html')
+    curr_user = 'HAHAHA'
+    return render_template('ViewWorkout.html',curr_user = curr_user)
 
 """" Todo list page. Accessible at <server-address>/todo
 
@@ -59,7 +60,9 @@ def addAccount():
     #If the function returns 0 counts, prompts user that login already exists and redirect back to page with error message (define UserTaken as TRUE)
     #If user doesnt exist, redirect to createworkoutplan page
     if todo_db.addAccount(db_conn,fname,lname,age,sex,weight,user,password):
-        return render_template('/viewWorkout.html')
+        global curr_user
+        curr_user = todo_db.get_user(db_conn,user,password)
+        return render_template('/createWorkout.html',fname = curr_user.fname)
     return render_template("/createAccount.html",userTaken = True)
 
 # Handles login task request. The task details are submitted by a HTML form with an action:
@@ -71,8 +74,14 @@ def verifyLogin():
     db_conn = get_db_conn()
 
     if todo_db.verifyLogin(db_conn,user,password):
-        return render_template("/viewWorkout.html")  # for now it forces to this
+        global curr_user
+        if curr_user.has_workout:
+            return render_template("/viewWorkout.html",fname = curr_user.fname)  # for now it forces to this
+        else:
+            return render_template("/createWorkout.html",fname = curr_user.fname )
+
     return render_template("/main.html",failLogin=True)
+
 
 @app.route('/checkAccounts')
 def checkAccounts():

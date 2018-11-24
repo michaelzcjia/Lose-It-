@@ -1,4 +1,5 @@
 import sqlite3
+from user import User
 
 
 INITIALIZE_DB = """
@@ -58,6 +59,12 @@ def addAccount(db_conn,fn,ln,age,sex,weight,user,pw):
 	except Exception:
 		return False
 	return True
+
+def get_user(db_conn,user,password):
+	fill = (user,password,)
+	results = db_conn.execute('SELECT * FROM ACCOUNT WHERE USERNAME = ? AND PASSWORD = ?', fill)
+	curr_user = User(results.fetchone())
+	return curr_user
 
 def get_tasks(db_conn):
 	results = db_conn.execute("SELECT task_id, task, done FROM todo;")
