@@ -2,6 +2,7 @@
 from flask import Flask, render_template, request, redirect, g
 import todo_db
 
+
 curr_user = 'Ratthew'
 # Define a path for the database
 DATABASE_PATH = "data.sqlite"
@@ -75,8 +76,12 @@ def verifyLogin():
 
     if todo_db.verifyLogin(db_conn,user,password):
         global curr_user
+        workoutObj = None
         curr_user = todo_db.get_user(db_conn,user,password)
         if curr_user.has_workout:
+            workoutObj = todo_db.get_workout(db_conn, curr_user.id)
+            todo_db.printWorkout(db_conn)
+            print('workoutObj: ',workoutObj.workout)
             return render_template("/viewWorkout.html",fname = curr_user.fname)  # for now it forces to this
         else:
             return render_template("/createWorkout.html",fname = curr_user.fname )
