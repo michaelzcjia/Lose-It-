@@ -59,6 +59,37 @@ def addAccount(db_conn,fn,ln,age,sex,weight,user,pw):
 		return False
 	return True
 
+#This function inserts the users entered preferences into the account
+#I don't think pId is needed, if there are already account preferences for an account we can just update them.
+
+def addPreferences(db_conn,aId, p1, p2, p3, a1, a2, a3, months, days, intensity, minutes, nutrition, goalWeight):
+	months2 = int(months)
+	days2 = int(days)
+	resultSet = db_conn.execute("SELECT COUNT(*) FROM ACCOUNT WHERE A_ID = '{}'".format(aId)) #determine if there are already preferences
+	try:
+		count = resultSet.fetchone()
+	except:
+		count = 0
+	try:
+		if(count == 0):
+			statement = "INSERT INTO Preference (A_id, Pref1, Pref2, Pref3, Avoid1, Avoid2, Avoid3, Months, Days, Intensity, Minutes, Nutrition, \
+						Goal_weight)"  "VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')"\
+						.format(aId,p1,p2,p3,a1,a2,a3,months,days,intensity,minutes,nutrition,goalWeight)
+			db_conn.execute(statement)
+			db_conn.commit()
+		else:
+			# Update the preferences instead of inserting new ones
+			statement = "UPDATE Preference SET Pref1 = '{}', Pref2 = '{}', Pref3 = '{}', Avoid1 = '{}', Avoid2 = '{}', Avoid3 = '{}',\
+						Months = '{}', Days = '{}', Intensity = '{}', Minutes = '{}', Nutrition = '{}', Goal_weight = '{}' WHERE A_Id = '{}'"\
+						.format(p1,p2,p3,a1,a2,a3,months,days,intensity,minutes,nutrition,goalWeight,aId)
+			db_conn.execute(statement)
+			db_conn.commit()
+	except Exception:
+		return False
+	return True
+
+
+
 def get_tasks(db_conn):
 	results = db_conn.execute("SELECT task_id, task, done FROM todo;")
 
