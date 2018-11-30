@@ -128,4 +128,3 @@ def remove_task(db_conn, task_id):
 	sqlDelete = "DELETE FROM todo WHERE task_id={}".format(task_id)
 	db_conn.execute(sqlDelete)
 	db_conn.commit()
-
