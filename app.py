@@ -71,21 +71,52 @@ def addAccount():
 # This function extracts the inputted login and password and calls the verify_login function
 @app.route('/verifyLogin', methods=['GET'])
 def verifyLogin():
+
+    #get user and password from page connection
     user = request.args.get('user')
     password = request.args.get('password')
     db_conn = get_db_conn()
 
+    #if login and password match
     if todo_db.verifyLogin(db_conn,user,password):
         global curr_user
         workoutObj = None
         curr_user = todo_db.get_user(db_conn,user,password)
+
+        #if user already has a workout
         if curr_user.has_workout:
+
+            #get workout based on user a_id
             workoutObj = todo_db.get_workout(db_conn, curr_user.id)
-            todo_db.printWorkout(db_conn)
-            print('workoutObj: ',workoutObj.workout)
-            return render_template("/viewWorkout.html",fname = curr_user.fname)  # for now it forces to this
+
+            #get workout exercises to print into html page
+            #print image:
+            # |exercise|duration|intensity|reps| x 6 exercises
+
+            #print("hello")
+
+            #create exercise list to be printed
+            exerciseList = []
+
+            for i in range(5):
+                j = i+1
+                exNum = "ex"+str(j)
+                #print(exNum)
+                if workoutObj.workout[exNum] != None:
+                    exerciseList.append(workoutObj.workout[exNum])
+
+            #good
+            print(exerciseList)
+
+            #todo_db.printWorkout(db_conn)
+            #print('workoutObj: ',workoutObj.workout)
+
+
+            #also add the preference data of goal and diet to the view workout template
+
+            return render_template("/viewWorkout.html",fname = curr_user.fname, exerciseList = exerciseList )  # for now it forces to this
         else:
-            return render_template("/createWorkout.html",fname = curr_user.fname )
+            return render_template("/createWorkout.html",fname = curr_user.fname)
 
     return render_template("/main.html",failLogin=True)
 

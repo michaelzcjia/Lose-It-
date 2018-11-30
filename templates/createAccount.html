@@ -3,25 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Account</title>
-
+    <link rel="stylesheet" type="text/css" href="static/css/style_createAccount.css">
 </head>
-<body>
+<body background="static/create_account_background.png">
     <div class="pageframe">
         <div class="addtask">
             <form action="/addAccount">
-                Create an Account:<br>
-                <input type="text" name="fname" placeholder="First Name" size=25 class="add-textbox">
-                <input type="text" name="lname" placeholder="Last Name" size=25 class="add-textbox">
-                <input type="text" name="age" placeholder="Age" size=25 class="add-textbox">
-                <input type="text" name="sex" placeholder="Sex" size=25 class="add-textbox">
-                <input type="text" name="weight" placeholder="Weight" size=25 class="add-textbox">
-                <input type="text" name="user" placeholder="Username" size=25 class="add-textbox">
-                <input type="text" name="password" placeholder="Password" size=25 class="add-textbox">
+
+                <div class="welcome">
+
+                    <div class="welText">
+
+                        <h1>Welcome to loseit!</h1></p>
+
+                        <div class="headDescr">
+                             <p>Let's get you all set up, so we can tailor make a plan to your preferences.</p>
+                             <p>Already have an account? (Sign in.) </p>
+                        </div>
+
+                    </div> 
+
+                    <img src="static/logo.png" class="logo" width = 12% height = 12% align="top">
+
+                </div>                                                                                
+
+
+
+
+
+
+                <div class="formTXT">
+                    <p>First Name</p>
+                    <input type="text" name="fname" size=30 class="add-textbox"><br>
+
+                    <p>Last Name</p>
+                    <input type="text" name="lname" size=30 class="add-textbox"><br>
+
+                    <p>Username</p>
+                    <input type="text" name="user" size=30 class="add-textbox"><br>
+
+                    <p>Password</p>
+                    <input type="text" name="password" size=30 class="add-textbox"><br>
+
+                    <p>Age</p>
+                    <input type="text" name="age" size=30 class="add-textbox"><br>
+
+                    <p>Sex</p>
+                    <input type="text" name="sex" size=30 class="add-textbox"><br>
+
+                    <p>Weight</p>
+                    <input type="text" name="weight" size=30 class="add-textbox"><br>
+
+                </div>
+
                 <br>
                 {%if userTaken%}
                     <p>Sorry, this user already exists!</p>
                 {%endif%}
-                <input type="submit" class="add-button" value="Login">
+                <input type="submit" class="add-button" value="Continue ">
             </form>
         </div>
     </div>
