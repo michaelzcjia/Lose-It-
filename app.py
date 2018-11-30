@@ -99,8 +99,8 @@ def checkAccounts():
 
 @app.route('/addPreferences', methods=['GET'])
 def addPreferences():
-    #need the session variable for the user account id
 
+    aId = curr_user.id #pulls the account id from the current user
     pref1 = request.args.get('pref1')
     pref2 = request.args.get('pref2')
     avoid1 = request.args.get('avoid1')
@@ -112,7 +112,8 @@ def addPreferences():
     goal_weight = request.args.get('goal_weight')
     db_conn = get_db_conn()
 
-    if todo_db.addPreferences(db_conn,pref1,pref2,avoid1,avoid2,months,days,intensity,nutrition,goal_weight):
+    #Call database function to insert the preferences into the database
+    if todo_db.addPreferences(db_conn,aId,pref1,pref2,avoid1,avoid2,months,days,intensity,nutrition,goal_weight):
         return render_template("/viewWorkout.html") #if the user is successful in adding their preferences, it redirects to the view of the workout
     else:
         return render_template("/createWorkout.html", failPreference=True)

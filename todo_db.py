@@ -71,7 +71,8 @@ def get_user(db_conn,user,password):
 #This function inserts the users entered preferences into the account
 #I don't think pId is needed, if there are already account preferences for an account we can just update them.
 
-def addPreferences(db_conn,aId, p1, p2, p3, a1, a2, a3, weeks, days, intensity, minutes, nutrition, goalWeight):
+def addPreferences(db_conn, aId, p1, p2, a1, a2, weeks, days, intensity, nutrition, goalWeight):
+
 	weeks2 = int(weeks)
 	days2 = int(days)
 	resultSet = db_conn.execute("SELECT COUNT(*) FROM ACCOUNT WHERE A_ID = '{}'".format(aId)) #determine if there are already preferences

@@ -28,11 +28,12 @@
                     <input type="number" name="goal_weight" placeholder="Goal Weight" size="25" class="add-textbox">
 
                     {%if failPreference%}
-                        <p>haha it failed</p>
+                        <p id="error_text">haha it failed</p>
                     {%endif%}
                     <input type="submit" class="add-button" value="Login">
 
 				</form>
+
 				<a href="/createAccount">
 					<button class = "add-button" >Create Account</button>
 				</a>
