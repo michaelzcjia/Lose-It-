@@ -61,13 +61,13 @@ def addAccount(db_conn,fn,ln,age,sex,weight,user,pw):
 		return False
 	return True
 
-<<<<<<< HEAD
+
 def get_user(db_conn,user,password):
 	fill = (user,password,)
 	results = db_conn.execute('SELECT * FROM ACCOUNT WHERE USERNAME = ? AND PASSWORD = ?', fill)
 	curr_user = User(results.fetchone())
 	return curr_user
-=======
+
 #This function inserts the users entered preferences into the account
 #I don't think pId is needed, if there are already account preferences for an account we can just update them.
 
@@ -98,7 +98,7 @@ def addPreferences(db_conn,aId, p1, p2, p3, a1, a2, a3, weeks, days, intensity, 
 	return True
 
 
->>>>>>> Preferences
+
 
 def get_tasks(db_conn):
 	results = db_conn.execute("SELECT task_id, task, done FROM todo;")
@@ -138,7 +138,6 @@ def remove_task(db_conn, task_id):
 	sqlDelete = "DELETE FROM todo WHERE task_id={}".format(task_id)
 	db_conn.execute(sqlDelete)
 	db_conn.commit()
-<<<<<<< HEAD
 def printWorkout(db_conn):
 	sql = "SELECT * FROM Workout"
 	results = db_conn.execute(sql)
@@ -160,7 +159,3 @@ def get_workout(db_conn, a_id):
 		print("should be ok")
 		workout = Workout(workout_data)
 		return workout
-
-
-=======
->>>>>>> Preferences
