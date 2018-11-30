@@ -37,7 +37,7 @@ def view_page():
     curr_user = 'HAHAHA'
     return render_template('ViewWorkout.html',curr_user = curr_user)
 
-"""" Todo list page. Accessible at <server-address>/todo
+""" Todo list page. Accessible at <server-address>/todo
 
 @app.route('/todo')
 def todo_list():
@@ -114,7 +114,7 @@ def addPreferences():
 
     #Call database function to insert the preferences into the database
     if todo_db.addPreferences(db_conn,aId,pref1,pref2,avoid1,avoid2,months,days,intensity,nutrition,goal_weight):
-        return render_template("/viewWorkout.html") #if the user is successful in adding their preferences, it redirects to the view of the workout
+        return redirect("/generateWorkout") #if the user is successful in adding their preferences, it redirects to the view of the workout
     else:
         return render_template("/createWorkout.html", failPreference=True)
 
