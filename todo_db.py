@@ -1,5 +1,6 @@
 import sqlite3
 from user import User
+from workout import Workout
 
 
 INITIALIZE_DB = """
@@ -104,4 +105,26 @@ def remove_task(db_conn, task_id):
 	sqlDelete = "DELETE FROM todo WHERE task_id={}".format(task_id)
 	db_conn.execute(sqlDelete)
 	db_conn.commit()
+def printWorkout(db_conn):
+	sql = "SELECT * FROM Workout"
+	results = db_conn.execute(sql)
+	for i in results:
+		print(i)
+	print("printed")
+
+def get_workout(db_conn, a_id):
+	sqlSelect = "SELECT * from Workout WHERE A_ID = '{}'".format(a_id)
+
+	results = db_conn.execute(sqlSelect)
+	workout_data = results.fetchone()
+	print(workout_data)
+
+	if workout_data == None:
+		print('what the fucc')
+		return False
+	else:
+		print("should be ok")
+		workout = Workout(workout_data)
+		return workout
+
 
