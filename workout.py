@@ -7,7 +7,6 @@ class Workout:
     workout["ex3"] = None
     workout["ex4"] = None
     workout["ex5"] = None
-    workout["ex6"] = None
     workout["days"] = None
     workout["months"] = None
     workout["mnt"] = None
@@ -16,10 +15,9 @@ class Workout:
     def __init__(self, attr):
         self.workout["id"] = attr[0]
         self.workout["a_id"] = attr[1]
-        for i, ex in enumerate(["ex1", "ex2", "ex3", "ex4", "ex5", "ex6"]):
-            self.workout[ex] = {"ex":attr[2+(4*i)],"dur":attr[3+(4*i)],"int":attr[4+(4*i)],"rep":attr[4+(4*i)]}
-        self.workout["days"] = attr[26]
-        self.workout["months"] = attr[27]
-        self.workout["mnt"] = attr[28]
-        self.workout["dfc"] = attr[29]
-
+        for i, ex in enumerate(["ex1", "ex2", "ex3", "ex4", "ex5"]):
+            self.workout[ex] = {"ex":attr[2+i+(4*i)],"dur":attr[3+i+(4*i)],"int":attr[4+i+(4*i)],"descr":attr[5+i+(4*i)], "img":attr[6+i+(4*i)]}
+        self.workout["days"] = attr[27]
+        self.workout["months"] = attr[28]
+        self.workout["mnt"] = attr[29]
+        self.workout["dfc"] = attr[30]
