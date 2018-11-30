@@ -2,9 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create Workout</title>
+    <title>Create a New Workout</title>
 </head>
 <body>
+    <div class="addPreferences">
+				<form action="/addPreferences">
+					Preferred Exercises<br>
+					<input type="text" name="pref1" placeholder="Pref1" size=25 class="add-textbox">
+                    <input type="text" name="pref2" placeholder="Pref2" size=25 class="add-textbox">
+                    <br>
 
+                    Avoided Exercises<br>
+                    <input type="text" name="avoid1" placeholder="Avoid1" size=25 class="add-textbox">
+                    <input type="text" name="avoid2" placeholder="Avoid2" size=25 class="add-textbox">
+					<br>
+
+                    User Effort<br>
+                    <input type="number" name="weeks" placeholder="Weeks" size="25" class="add-textbox">
+                    <input type="number" name="days" placeholder="Days" size="25" class="add-textbox">
+                    <input type="text" name="intensity" placeholder="Intensity" size="25" class="add-textbox">
+                    <br>
+
+                    User Goals<br>
+                    <input type="number" name="nutrition" placeholder=Nutrition" size="25" class="add-textbox">
+                    <input type="number" name="goal_weight" placeholder="Goal Weight" size="25" class="add-textbox">
+
+                    {%if failPreference%}
+                        <p id="error_text">haha it failed</p>
+                    {%endif%}
+                    <input type="submit" class="add-button" value="Login">
+
+				</form>
+
+				<a href="/createAccount">
+					<button class = "add-button" >Create Account</button>
+				</a>
+
+				<form action = "/checkAccounts">
+					<input type="submit" class = "add-button" value = "Check Accounts" >
+				</form>
+			</div>
 </body>
 </html>

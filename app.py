@@ -10,6 +10,7 @@ DATABASE_PATH = "data.sqlite"
 # create a Flask app
 app = Flask(__name__)
 
+#Returns path to the database
 def get_db_conn():
     if not hasattr(g, "_db_conn"):
         g._db_conn = todo_db.initialize_db(DATABASE_PATH)
@@ -125,8 +126,33 @@ def checkAccounts():
     todo_db.checkAccounts(get_db_conn())
     return render_template("/main.html")
 
+# Handles insertion of user preferences into the database. The preferences are submitted by a HTML form with an action:
+
+@app.route('/addPreferences', methods=['GET'])
+def addPreferences():
+
+    aId = curr_user.id #pulls the account id from the current user
+    pref1 = request.args.get('pref1')
+    pref2 = request.args.get('pref2')
+    avoid1 = request.args.get('avoid1')
+    avoid2 = request.args.get('avoid2')
+    months = request.args.get('weeks')
+    days = request.args.get('days')
+    intensity = request.args.get('intensity')
+    nutrition = request.args.get('nutrition')
+    goal_weight = request.args.get('goal_weight')
+    db_conn = get_db_conn()
+
+    #Call database function to insert the preferences into the database
+    if todo_db.addPreferences(db_conn,aId,pref1,pref2,avoid1,avoid2,months,days,intensity,nutrition,goal_weight):
+        return render_template("/viewWorkout.html") #if the user is successful in adding their preferences, it redirects to the view of the workout
+    else:
+        return render_template("/createWorkout.html", failPreference=True)
+
+
+
 # Handles add task request. The task details are submitted by a HTML form with an action="/add".
-# This function extract the form field "title" and calls the app function add_task
+# This function extract the form field "title" and calls the app function add_task. NOTRELEVANT
 
 @app.route('/add', methods=['GET'])
 def add_task():
