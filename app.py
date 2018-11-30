@@ -105,7 +105,7 @@ def addPreferences():
 
 
 # Handles add task request. The task details are submitted by a HTML form with an action="/add".
-# This function extract the form field "title" and calls the app function add_task
+# This function extract the form field "title" and calls the app function add_task. NOTRELEVANT
 
 @app.route('/add', methods=['GET'])
 def add_task():

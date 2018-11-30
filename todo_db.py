@@ -74,14 +74,14 @@ def addPreferences(db_conn,aId, p1, p2, p3, a1, a2, a3, weeks, days, intensity, 
 		if(count == 0):
 			statement = "INSERT INTO Preference (A_id, Pref1, Pref2, Avoid1, Avoid2,Weeks, Days, Intensity, Minutes, Nutrition, \
 						Goal_weight)"  "VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')"\
-						.format(aId,p1,p2,a1,a2,weeks2,days,intensity,nutrition,goalWeight)
+						.format(aId,p1,p2,a1,a2,weeks2,days2,intensity,nutrition,goalWeight)
 			db_conn.execute(statement)
 			db_conn.commit()
 		else:
 			# Update the preferences instead of inserting new ones
 			statement = "UPDATE Preference SET Pref1 = '{}', Pref2 = '{}', Avoid1 = '{}', Avoid2 = '{}',\
 						Weeks = '{}', Days = '{}', Intensity = '{}', Nutrition = '{}', Goal_weight = '{}' WHERE A_Id = '{}'"\
-						.format(p1,p2,a1,a2,weeks2,days,intensity,nutrition,goalWeight,aId)
+						.format(p1,p2,a1,a2,weeks2,days2,intensity,nutrition,goalWeight,aId)
 			db_conn.execute(statement)
 			db_conn.commit()
 	except Exception:
