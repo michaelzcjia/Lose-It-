@@ -127,4 +127,11 @@ def get_workout(db_conn, a_id):
 		workout = Workout(workout_data)
 		return workout
 
+def get_exercises(db_conn):
+	sqlSelect = "SELECT * from Exercise"
+	results = db_conn.execute(sqlSelect)
+	exdb = results.fetchone()
+	print(exdb)
+	return exdb
+
 

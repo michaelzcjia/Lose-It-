@@ -131,5 +131,13 @@ def remove_task(task_id):
     todo_db.remove_task(db_conn, task_id)
     return redirect("/todo", code=307)
 
+@app.route('/generateWorkout')
+def generateWorkout():
+    db_conn = get_db_conn()
+    todo_db.get_exercises(db_conn)
+    return
+
+
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=True)
+    #app.run(debug=True, use_reloader=True)
+    generateWorkout()
