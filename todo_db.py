@@ -1,6 +1,7 @@
 import sqlite3
 from user import User
 from workout import Workout
+from preference import Preference
 #from preference import Preference
 #Add above later when M
 
@@ -141,6 +142,7 @@ def remove_task(db_conn, task_id):
 	sqlDelete = "DELETE FROM todo WHERE task_id={}".format(task_id)
 	db_conn.execute(sqlDelete)
 	db_conn.commit()
+
 def printWorkout(db_conn):
 	sql = "SELECT * FROM Workout"
 	results = db_conn.execute(sql)
@@ -165,23 +167,24 @@ def get_workout(db_conn, a_id):
 
 def get_exercises(db_conn):
 	sqlSelect = "SELECT * from Exercise"
-	results = db_conn.execute(sqlSelect)
-	exdb = results.fetchone()
-	print(exdb)
-	return exdb
 
-#Pulls preference information from database to return a Preference object
+	results = db_conn.execute(sqlSelect)
+	print(type(results))
+	data = results.fetchall()
+	#print(data)
+	return data
+
 def get_preference(db_conn, a_id):
 	sqlSelect = "SELECT * from Preference WHERE A_ID = '{}'".format(a_id)
 
 	results = db_conn.execute(sqlSelect)
-	preference_data = results.fetchone()
-	print(preference_data)
+	data = results.fetchone()
+	print(data)
 
-	if preference_data == None:
-		print('it really do be like that sometimes')
+	if data == None:
+		print('what the fucc')
 		return False
 	else:
-		print("Preferences are litty fams")
-		preference = Preference(preference_data)
-		return preference
+		print("should be ok")
+		p = Preference(data)
+		return p

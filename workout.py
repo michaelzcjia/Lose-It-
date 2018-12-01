@@ -1,5 +1,6 @@
 import numpy as np
 import app
+import pandas as pd
 
 class Workout:
     workout = dict()
@@ -32,9 +33,12 @@ class Workout:
         self.workout["id"] = int(np.random.random()*10000)
         self.workout["a_id"] = a_id
 
-    def generate_workout(self, pref, user, e_df):
+    def generate_workout(self, pref, user, e_data):
         #Get weekly calories needed
         weekly_burn = self.calc_cal(pref,user)
+
+        e_df = pd.DataFrame(e_data)
+        print(e_df.info())
 
         #How many exercises?
             #Four Exercises (including the two they like, discluding the two they don't)
@@ -52,29 +56,29 @@ class Workout:
     def calc_cal(self, pref, user):
         "Returns the daily caloric burn"
         #Note: make sure to do type conversion (string -> float)
-        w = user.weight
-        h = user.height
-        a = user.age
+        w = int(user.weight)
+        h = int(user.height)
+        a = int(user.age)
         s = user.sex
         m_cal = self.calc_maint(w,h,a,s)
 
         #how many pounds per week do they want to lose?
         lb_per_week = pref.lb_wk
         wkly_def = 0
-        if lb_per_week == 1:
+        if lb_per_week == "1":
             wkly_def = 3500
-        if lb_per_week == 1.5:
+        if lb_per_week == "1.5":
             wkly_def = 5200
-        if lb_per_week == 2:
+        if lb_per_week == "2":
             wkly_def = 7000
 
         #how willing they are to diet
         nutr = pref.pref["nutri"]
-        if nutr == 1:
+        if nutr == "1":
             nutr_def = 0
-        if nutr == 2:
+        if nutr == "2":
             nutr_def = wkly_def * 0.3
-        if nutr == 3:
+        if nutr == "3":
             nutr_def = wkly_def * 0.6
 
         #Required total deficit

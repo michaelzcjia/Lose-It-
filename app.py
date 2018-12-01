@@ -1,6 +1,8 @@
 # imports
 from flask import Flask, render_template, request, redirect, g
 import todo_db
+import workout
+from preference import Preference
 
 
 curr_user = 'Ratthew'
@@ -65,7 +67,8 @@ def addAccount():
         global curr_user
         curr_user = todo_db.get_user(db_conn,user,password)
         return render_template('/createWorkout.html',fname = curr_user.fname)
-    return render_template("/createAccount.html",userTaken = True)
+    return render_template("/generateWorkout.html",userTaken = True)
+    #Need to change this back later to createaccount
 
 # Handles login task request. The task details are submitted by a HTML form with an action:
 # This function extracts the inputted login and password and calls the verify_login function
@@ -190,13 +193,15 @@ def remove_task(task_id):
 
 @app.route('/generateWorkout')
 def generateWorkout():
+    a_id = curr_user.id
+    #JUST FOR TESTING PURPOSES
+    a_id = 1
     db_conn = get_db_conn()
-    todo_db.get_exercises(db_conn)
+    e_data = todo_db.get_exercises(db_conn)
+    wo = workout.Workout(a_id)
+    pref = todo_db.get_preference(db_conn, a_id)
+    wo.generate_workout(pref, curr_user, e_data)
     return
-
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
-
-    #app.run(debug=True, use_reloader=True)
-    generateWorkout()
