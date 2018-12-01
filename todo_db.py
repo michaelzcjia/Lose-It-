@@ -1,7 +1,8 @@
 import sqlite3
 from user import User
 from workout import Workout
-from preference import Preference
+#from preference import Preference
+#Add above later when M
 
 
 INITIALIZE_DB = """

@@ -87,7 +87,7 @@ def verifyLogin():
         else:
             return render_template("/createWorkout.html",fname = curr_user.fname )
 
-    return render_template("/main.html",failLogin=True)
+    return render_template("/main.html", failLogin=True)
 
 
 @app.route('/checkAccounts')
