@@ -1,6 +1,8 @@
 import sqlite3
 from user import User
 from workout import Workout
+#from preference import Preference
+#Add above later when M
 
 
 INITIALIZE_DB = """
@@ -99,7 +101,7 @@ def addPreferences(db_conn, aId, p1, p2, a1, a2, weeks, days, intensity, nutriti
 	return True
 
 
-
+# Task Functions below
 
 def get_tasks(db_conn):
 	results = db_conn.execute("SELECT task_id, task, done FROM todo;")
@@ -160,3 +162,19 @@ def get_workout(db_conn, a_id):
 		print("should be ok")
 		workout = Workout(workout_data)
 		return workout
+
+#Pulls preference information from database to return a Preference object
+def get_preference(db_conn, a_id):
+	sqlSelect = "SELECT * from Preference WHERE A_ID = '{}'".format(a_id)
+
+	results = db_conn.execute(sqlSelect)
+	preference_data = results.fetchone()
+	print(preference_data)
+
+	if preference_data == None:
+		print('it really do be like that sometimes')
+		return False
+	else:
+		print("Preferences are litty fams")
+		preference = Preference(preference_data)
+		return preference

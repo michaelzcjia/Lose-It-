@@ -8,10 +8,10 @@ body {
 	background-color: transparent;
 	border: 0px;
 	border-bottom: 2px solid #ffffff;
-	font-family: "Comic Sans MS";
+	font-family: "Segoe UI";
     color: #ffffff;
     font-size: 14pt;
-    margin: 0px 10px;
+    margin: 10px 10px;
 }
 
 .header {
@@ -93,4 +93,3 @@ ul li.done {
 	text-decoration: line-through;
 	font-style: italic;
 }
-
