@@ -54,6 +54,7 @@ def addAccount():
     age = request.args.get('age')
     sex = request.args.get('sex')
     weight = request.args.get('weight')
+    height = request.args.get('height')
     user = request.args.get('user')
     password = request.args.get('password')
     db_conn = get_db_conn()
@@ -61,7 +62,7 @@ def addAccount():
     #Performs a function where it looks for a row that contains the user above
     #If the function returns 0 counts, prompts user that login already exists and redirect back to page with error message (define UserTaken as TRUE)
     #If user doesnt exist, redirect to createworkoutplan page
-    if todo_db.addAccount(db_conn,fname,lname,age,sex,weight,user,password):
+    if todo_db.addAccount(db_conn,fname,lname,age,sex,weight,height,user,password):
         global curr_user
         curr_user = todo_db.get_user(db_conn,user,password)
         return render_template('/createWorkout.html',fname = curr_user.fname)
