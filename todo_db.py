@@ -1,6 +1,8 @@
 import sqlite3
 from user import User
 from workout import Workout
+#from preference import Preference
+#Add above later when M
 
 
 INITIALIZE_DB = """
@@ -61,11 +63,45 @@ def addAccount(db_conn,fn,ln,age,sex,weight,user,pw):
 		return False
 	return True
 
+
 def get_user(db_conn,user,password):
 	fill = (user,password,)
 	results = db_conn.execute('SELECT * FROM ACCOUNT WHERE USERNAME = ? AND PASSWORD = ?', fill)
 	curr_user = User(results.fetchone())
 	return curr_user
+
+#This function inserts the users entered preferences into the account
+#I don't think pId is needed, if there are already account preferences for an account we can just update them.
+
+def addPreferences(db_conn, aId, p1, p2, a1, a2, weeks, days, intensity, nutrition, goalWeight):
+
+	weeks2 = int(weeks)
+	days2 = int(days)
+	resultSet = db_conn.execute("SELECT COUNT(*) FROM ACCOUNT WHERE A_ID = '{}'".format(aId)) #determine if there are already preferences
+	try:
+		count = resultSet.fetchone()
+	except:
+		count = 0
+	try:
+		if(count == 0):
+			statement = "INSERT INTO Preference (A_id, Pref1, Pref2, Avoid1, Avoid2,Weeks, Days, Intensity, Minutes, Nutrition, \
+						Goal_weight)"  "VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')"\
+						.format(aId,p1,p2,a1,a2,weeks2,days2,intensity,nutrition,goalWeight)
+			db_conn.execute(statement)
+			db_conn.commit()
+		else:
+			# Update the preferences instead of inserting new ones
+			statement = "UPDATE Preference SET Pref1 = '{}', Pref2 = '{}', Avoid1 = '{}', Avoid2 = '{}',\
+						Weeks = '{}', Days = '{}', Intensity = '{}', Nutrition = '{}', Goal_weight = '{}' WHERE A_Id = '{}'"\
+						.format(p1,p2,a1,a2,weeks2,days2,intensity,nutrition,goalWeight,aId)
+			db_conn.execute(statement)
+			db_conn.commit()
+	except Exception:
+		return False
+	return True
+
+
+# Task Functions below
 
 def get_tasks(db_conn):
 	results = db_conn.execute("SELECT task_id, task, done FROM todo;")
@@ -134,4 +170,18 @@ def get_exercises(db_conn):
 	print(exdb)
 	return exdb
 
+#Pulls preference information from database to return a Preference object
+def get_preference(db_conn, a_id):
+	sqlSelect = "SELECT * from Preference WHERE A_ID = '{}'".format(a_id)
 
+	results = db_conn.execute(sqlSelect)
+	preference_data = results.fetchone()
+	print(preference_data)
+
+	if preference_data == None:
+		print('it really do be like that sometimes')
+		return False
+	else:
+		print("Preferences are litty fams")
+		preference = Preference(preference_data)
+		return preference

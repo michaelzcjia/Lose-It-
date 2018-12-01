@@ -3,8 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <title>View Workout</title>
+    <link rel="stylesheet" type="text/css" href="static/css/style_viewWorkout.css">
 </head>
 <body>
-    <p >This is your current workout plan {{ fname }}</p>
+    <div class="pageContent">
+
+        <div class="welcome">
+            <div class="welText">
+                <h1>Hi {{ fname }}! This is your current workout plan. </h1>
+            </div>
+
+            <img src="static/logo.png" class="logo" align="middle">
+        </div>
+
+        <div class="header">
+
+            <div class="GD">
+                <p><b>Goal</b></p>
+                <p><b>Diet</b></p>
+            </div>
+
+            <div class="GDDescr">
+                <p>Lose x pounds by x</p>
+                <p>x calories per day</p>
+            </div>
+
+        </div>
+
+        <h2 class="extext">Exercises</h2>
+
+        <!-- Create 5 exercise boxes -->
+
+        {% for exercise in exerciseList %}
+        <div class="fullExerciseBox">
+
+            <!-- To the Left -->
+            <div class="exIMG">
+                <!-- PRINT GIF HERE-->
+                <!--<p>IMG</p>-->
+                <img src="static/pushup.gif" width=70% height=70%>
+            </div>
+
+
+
+            <!-- IN THE MIDDLE -->
+            <div class="exNameAndSpec">
+
+                <h3>{{ exercise["ex"] }}</h3>
+
+                <div class="exSpec">
+                    <p>Duration:  {{ exercise["dur"] }}</p>
+                    <p>Intensity: {{ exercise["int"] }}</p>
+                </div>
+
+            </div>
+
+
+
+            <!-- To the Right -->
+            <div class="exDescription">
+
+                <p>{{ exercise["descr"] }}</p>
+
+            </div>
+
+
+
+        </div>
+        {% endfor %}
+
+    </div>
 </body>
 </html>

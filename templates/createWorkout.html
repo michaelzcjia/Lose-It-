@@ -2,9 +2,83 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create Workout</title>
+    <title>Create a New Workout</title>
 </head>
 <body>
+    <div class="addPreferences">
+				<form action="/addPreferences">
 
+          <!-- Need to discuss the values with Michael-->
+					          Preferred Exercises<br><br>
+					          <select required name="pref1" placeholder="Pref1" class="add-textbox">
+                      <!-- still need to add the rest of the exercise-->
+                      <option value="pushups">Push ups</option>
+                      <option value="situps">Sit ups</option>
+                    </select>
+
+                    <select required name="pref2" placeholder="Pref2" class="add-textbox">
+                      <!-- still need to add the rest of the exercise-->
+                      <option value="pushups">Push ups</option>
+                      <option value="situps">Sit ups</option>
+                    </select>
+                    <br><br>
+
+                    Avoided Exercises<br><br>
+
+                    <select name="avoid1" placeholder="Avoid1" class="add-textbox">
+                      <!-- still need to add the rest of the exercise-->
+                      <option selected="selected" default disabled id="select_placeholder"> Select Exercises to Avoid </option>
+                      <option value="pushups">Push ups </option>
+                      <option value="situps">Sit ups </option>
+                    </select>
+
+                    <select name="avoid2" placeholder="Avoid2" class="add-textbox">
+                      <!-- still need to add the rest of the exercise-->
+                      <option value="pushups">Push ups </option>
+                      <option value="situps">Sit ups </option>
+                    </select>
+					          <br><br>
+
+                    User Effort<br><br>
+
+                    <select name="weeks" placeholder="Weeks" class="add-textbox">
+                      <option value=1> 1lbs per Week </option>
+                      <option value=1.5> 1.5lbs per Week </option>
+                      <option value=2> 2lbs per Week </option>
+                    </select>
+
+                    <select name="days" placeholder="Days" class="add-textbox">
+                      <option value=2> 2 Days per Week </option>
+                      <option value=3> 3 Days per Week </option>
+                      <option value=4> 4 Days per Week </option>
+                    </select>
+
+                    <select name="intensity" placeholder="Intensity" class="add-textbox">
+                      <option value="low"> Low but Long Workouts </option>
+                      <option value="moderate"> Moderate, yet Moderate Workouts </option>
+                      <option value="long"> Long, however Short Workouts </option>
+                    </select>
+
+                    <br><br>
+
+                    User Goals<br><br>
+
+                    <select name="nutrition" placeholder="Nutrition" class="add-textbox">
+                      <option value="N"> No Diet </option>
+                      <option value="SD"> Slight Diet </option>
+                      <option value="D"> Diet </option>
+                    </select>
+
+                    <input type="number" name="goal_weight" placeholder="Goal Weight" size="25" class="add-textbox">
+                    <br><br>
+
+                    {%if failPreference%}
+                        <p id="error_text">haha it failed</p>
+                    {%endif%}
+                    <input type="submit" class="add-button" value="Submit Preferences">
+
+				</form>
+
+			</div>
 </body>
 </html>

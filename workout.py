@@ -12,7 +12,7 @@ class Workout:
     workout["ex5"] = None
     workout["ex6"] = None
     workout["days"] = None
-    workout["weeks"] = None
+    workout["months"] = None
     workout["mnt"] = None
     workout["dfc"] = None
 
@@ -20,12 +20,12 @@ class Workout:
         '''Get an existing workout'''
         self.workout["id"] = attr[0]
         self.workout["a_id"] = attr[1]
-        for i, ex in enumerate(["ex1", "ex2", "ex3", "ex4", "ex5", "ex6"]):
-            self.workout[ex] = {"ex":attr[2+(4*i)],"dur":attr[3+(4*i)],"int":attr[4+(4*i)],"rep":attr[5+(4*i)]}
-        self.workout["days"] = attr[26]
-        self.workout["weeks"] = attr[27]
-        self.workout["mnt"] = attr[28]
-        self.workout["dfc"] = attr[29]
+        for i, ex in enumerate(["ex1", "ex2", "ex3", "ex4", "ex5"]):
+            self.workout[ex] = {"ex":attr[2+i+(4*i)],"dur":attr[3+i+(4*i)],"int":attr[4+i+(4*i)],"descr":attr[5+i+(4*i)], "img":attr[6+i+(4*i)]}
+        self.workout["days"] = attr[27]
+        self.workout["months"] = attr[28]
+        self.workout["mnt"] = attr[29]
+        self.workout["dfc"] = attr[30]
 
     def __init__(self, a_id):
         '''Get an existing workout'''
@@ -104,8 +104,6 @@ class Workout:
         cal = height * 6.25 + weight * kg_to_lb * 9.99 - age * 4.92 + const_f
         cal *= activity_f
         return cal
-
-
 
 
 #Create an empty workout object

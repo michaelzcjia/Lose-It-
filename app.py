@@ -10,6 +10,7 @@ DATABASE_PATH = "data.sqlite"
 # create a Flask app
 app = Flask(__name__)
 
+#Returns path to the database
 def get_db_conn():
     if not hasattr(g, "_db_conn"):
         g._db_conn = todo_db.initialize_db(DATABASE_PATH)
@@ -36,7 +37,7 @@ def view_page():
     curr_user = 'HAHAHA'
     return render_template('ViewWorkout.html',curr_user = curr_user)
 
-"""" Todo list page. Accessible at <server-address>/todo
+""" Todo list page. Accessible at <server-address>/todo
 
 @app.route('/todo')
 def todo_list():
@@ -70,23 +71,54 @@ def addAccount():
 # This function extracts the inputted login and password and calls the verify_login function
 @app.route('/verifyLogin', methods=['GET'])
 def verifyLogin():
+
+    #get user and password from page connection
     user = request.args.get('user')
     password = request.args.get('password')
     db_conn = get_db_conn()
 
+    #if login and password match
     if todo_db.verifyLogin(db_conn,user,password):
         global curr_user
         workoutObj = None
         curr_user = todo_db.get_user(db_conn,user,password)
-        if curr_user.has_workout:
-            workoutObj = todo_db.get_workout(db_conn, curr_user.id)
-            todo_db.printWorkout(db_conn)
-            print('workoutObj: ',workoutObj.workout)
-            return render_template("/viewWorkout.html",fname = curr_user.fname)  # for now it forces to this
-        else:
-            return render_template("/createWorkout.html",fname = curr_user.fname )
 
-    return render_template("/main.html",failLogin=True)
+        #if user already has a workout
+        if curr_user.has_workout:
+
+            #get workout based on user a_id
+            workoutObj = todo_db.get_workout(db_conn, curr_user.id)
+
+            #get workout exercises to print into html page
+            #print image:
+            # |exercise|duration|intensity|reps| x 6 exercises
+
+            #print("hello")
+
+            #create exercise list to be printed
+            exerciseList = []
+
+            for i in range(5):
+                j = i+1
+                exNum = "ex"+str(j)
+                #print(exNum)
+                if workoutObj.workout[exNum] != None:
+                    exerciseList.append(workoutObj.workout[exNum])
+
+            #good
+            print(exerciseList)
+
+            #todo_db.printWorkout(db_conn)
+            #print('workoutObj: ',workoutObj.workout)
+
+
+            #also add the preference data of goal and diet to the view workout template
+
+            return render_template("/viewWorkout.html",fname = curr_user.fname, exerciseList = exerciseList )  # for now it forces to this
+        else:
+            return render_template("/createWorkout.html",fname = curr_user.fname)
+
+    return render_template("/main.html", failLogin=True)
 
 
 @app.route('/checkAccounts')
@@ -94,8 +126,33 @@ def checkAccounts():
     todo_db.checkAccounts(get_db_conn())
     return render_template("/main.html")
 
+# Handles insertion of user preferences into the database. The preferences are submitted by a HTML form with an action:
+
+@app.route('/addPreferences', methods=['GET'])
+def addPreferences():
+
+    aId = curr_user.id #pulls the account id from the current user
+    pref1 = request.args.get('pref1')
+    pref2 = request.args.get('pref2')
+    avoid1 = request.args.get('avoid1')
+    avoid2 = request.args.get('avoid2')
+    months = request.args.get('weeks')
+    days = request.args.get('days')
+    intensity = request.args.get('intensity')
+    nutrition = request.args.get('nutrition')
+    goal_weight = request.args.get('goal_weight')
+    db_conn = get_db_conn()
+
+    #Call database function to insert the preferences into the database
+    if todo_db.addPreferences(db_conn,aId,pref1,pref2,avoid1,avoid2,months,days,intensity,nutrition,goal_weight):
+        return redirect("/generateWorkout") #if the user is successful in adding their preferences, it redirects to the view of the workout
+    else:
+        return render_template("/createWorkout.html", failPreference=True)
+
+
+
 # Handles add task request. The task details are submitted by a HTML form with an action="/add".
-# This function extract the form field "title" and calls the app function add_task
+# This function extract the form field "title" and calls the app function add_task. NOTRELEVANT
 
 @app.route('/add', methods=['GET'])
 def add_task():
@@ -139,5 +196,7 @@ def generateWorkout():
 
 
 if __name__ == '__main__':
+    app.run(debug=True, use_reloader=True)
+
     #app.run(debug=True, use_reloader=True)
     generateWorkout()
