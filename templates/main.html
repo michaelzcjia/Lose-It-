@@ -2,18 +2,19 @@
 <html>
 <head>
 	<title>loseit!</title>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Varela+Round" rel="stylesheet">
 	<link rel="stylesheet" href="static/css/style_main.css">
 </head>
-<body background="static/images/mainbg.png" width=10% height=10%>
+<body >
 		<div class="pageframe">
 			<div class="logoHeadBlock">
 
-				<img src="static/images/Group 17.png" class="logo" width="10%" height="10%" align="middle">
+				<img src="static/images/Group 17.png" class="logo" align="middle">
 				<h1 class="title">Lose it!</h1>
 
 				<!--<a href="/todo" style="color: white"> Click here to enter </a>-->
 
-				<p class="introTxt">Working out is fun and easy lol, join us today.</p>
+				<p class="introTxt">Do you want to lose weight, but don't know how to start? Loseit.io's got your back! Join us today in a fun and easy adventure to reach your weight loss dreams! </p>
 
 				<p class="description">We exercise so you don't have to. Join over 200,000 users in the journey to become fit and fabulous.</p>
 
@@ -25,26 +26,23 @@
 
 					<form action="/verifyLogin">
 
-						<h1 class="loginPrompt">Sign in to Loseit.io</h1>
+						<h2 class="loginPrompt">Sign in to Loseit.io</h2>
 
 						<input type="text" name="user" placeholder="Username" class="add-textbox"><br>
 						<input type="password" name="password" placeholder="Password" class="add-textbox"><br>
-						<br>
+
 						{%if failLogin:%}
-							<p>Incorrect Username and Password</p>
+							<p class="error-msg">Incorrect Username and Password</p><br>
 						{% endif %}
 
-						<input type="submit" class="add-button" value="Login">
+						<input type="submit" class="login-button" value="Login">
 					</form>
 					<a href="/createAccount">
-						<button class = "add-button" >Create Account</button>
+						<button class = "sign-in-button" >Sign Up</button>
 					</a>
 
 				</div>
 
-				<form action = "/checkAccounts">
-					<input type="submit" class = "add-button" value = "Check Accounts" >
-					</form>
 			</div>
 
 		</div>
