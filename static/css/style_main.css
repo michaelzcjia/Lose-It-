@@ -1,0 +1,87 @@
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.body{
+    background-position: top;
+}
+
+p {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 20px;
+
+}
+
+
+h1 {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 45px;
+}
+
+h2 {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #708090
+}
+
+.logo{
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.title{
+    display: inline-block;
+    position: relative;
+    left: 20px;
+    font-size: 60px;
+
+}
+
+.loginPrompt{
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+
+.introTxt{
+    width: 300px;
+    line-height: 1.5;
+    margin-bottom: 80px;
+}
+
+.description{
+    width: 400px;
+    line-height: 1.5;
+}
+
+.logoHeadBlock{
+    background-color: #FFF8DC;
+    position: relative;
+    display: inline-block;
+
+}
+
+.loginBlock{
+    display: inline-block;
+}
+
+.add-textbox{
+    margin-bottom: 20px;
+    width: 26e  m;
+    height: 2em;
+
+    border-radius: 4px;
+    border: 2px solid #00008B;
+
+}

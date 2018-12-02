@@ -1,6 +1,8 @@
 import sqlite3
 from user import User
 from workout import Workout
+#from preference import Preference
+#Add above later when M
 
 
 INITIALIZE_DB = """
@@ -44,17 +46,18 @@ def checkAccounts(db_conn):
 	for i in results:
 		print(i)
 
-def addAccount(db_conn,fn,ln,age,sex,weight,user,pw):
+def addAccount(db_conn,fn,ln,age,sex,weight,height,user,pw):
 	age2 = int(age)
 	weight2 = int(weight)
+	height2 = int(height)
 	count = db_conn.execute("SELECT COUNT(*) FROM ACCOUNT")
 	try:
 		count = count.fetchone()
 	except:
 		count = 0
-	try:
-		statement = "INSERT INTO ACCOUNT (a_id, first_name, last_name,age,sex,weight,username,password,maintenance) " \
-					"VALUES ('{}','{}','{}',{},'{}',{},'{}','{}',{})".format(count,fn,ln,age2,sex,weight2,user,pw,123)
+	try: #Added height after weight
+		statement = "INSERT INTO ACCOUNT (a_id, first_name, last_name,age,sex,weight,height,username,password,maintenance) " \
+					"VALUES ('{}','{}','{}',{},'{}',{},'{}','{}',{})".format(count,fn,ln,age2,sex,weight2,height2,user,pw,123)
 		db_conn.execute(statement)
 		db_conn.commit()
 	except Exception:
@@ -80,14 +83,16 @@ def addPreferences(db_conn, aId, p1, p2, a1, a2, weeks, days, intensity, nutriti
 		count = resultSet.fetchone()
 	except:
 		count = 0
-	try:
+
+
+	try: #If there are no preferences for the current user, then insert the preferences into the database
 		if(count == 0):
 			statement = "INSERT INTO Preference (A_id, Pref1, Pref2, Avoid1, Avoid2,Weeks, Days, Intensity, Minutes, Nutrition, \
 						Goal_weight)"  "VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')"\
 						.format(aId,p1,p2,a1,a2,weeks2,days2,intensity,nutrition,goalWeight)
 			db_conn.execute(statement)
 			db_conn.commit()
-		else:
+		else: #If there are existing preferences, then we will update the values
 			# Update the preferences instead of inserting new ones
 			statement = "UPDATE Preference SET Pref1 = '{}', Pref2 = '{}', Avoid1 = '{}', Avoid2 = '{}',\
 						Weeks = '{}', Days = '{}', Intensity = '{}', Nutrition = '{}', Goal_weight = '{}' WHERE A_Id = '{}'"\
@@ -99,7 +104,7 @@ def addPreferences(db_conn, aId, p1, p2, a1, a2, weeks, days, intensity, nutriti
 	return True
 
 
-
+# Task Functions below
 
 def get_tasks(db_conn):
 	results = db_conn.execute("SELECT task_id, task, done FROM todo;")
@@ -160,3 +165,19 @@ def get_workout(db_conn, a_id):
 		print("should be ok")
 		workout = Workout(workout_data)
 		return workout
+
+#Pulls preference information from database to return a Preference object
+def get_preference(db_conn, a_id):
+	sqlSelect = "SELECT * from Preference WHERE A_ID = '{}'".format(a_id)
+
+	results = db_conn.execute(sqlSelect)
+	preference_data = results.fetchone()
+	print(preference_data)
+
+	if preference_data == None:
+		print('it really do be like that sometimes')
+		return False
+	else:
+		print("Preferences are litty fams")
+		preference = Preference(preference_data)
+		return preference

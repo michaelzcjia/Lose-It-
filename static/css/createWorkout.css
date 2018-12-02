@@ -1,3 +1,7 @@
-id failure_text {
+#failure_text {
   color:red;
+}
+
+#select_placeholder {
+  color: red;
 }
