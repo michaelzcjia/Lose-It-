@@ -17,7 +17,7 @@ class Preference:
         self.pref["p2"] = attr[2]
         self.pref["a1"] = attr[3]
         self.pref["a2"] = attr[4]
-        self.pref["weeks"] = attr[5]
+        self.pref["lb_wk"] = attr[5]
         self.pref["days"] = attr[6]
         self.pref["intensity"] = attr[7]
         self.pref["nutri"] = attr[8]

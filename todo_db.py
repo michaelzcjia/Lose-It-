@@ -48,6 +48,7 @@ def checkAccounts(db_conn):
 		print(i)
 
 def addAccount(db_conn,fn,ln,age,sex,weight,height,user,pw):
+	sex2 = 'M' if sex == 'Male' else 'F'
 	age2 = int(age)
 	weight2 = int(weight)
 	height2 = int(height)
@@ -57,8 +58,8 @@ def addAccount(db_conn,fn,ln,age,sex,weight,height,user,pw):
 	except:
 		count = 0
 	try: #Added height after weight
-		statement = "INSERT INTO ACCOUNT (a_id, first_name, last_name,age,sex,weight,height,username,password,maintenance) " \
-					"VALUES ('{}','{}','{}',{},'{}',{},'{}','{}',{})".format(count,fn,ln,age2,sex,weight2,height2,user,pw,123)
+		statement = "INSERT INTO ACCOUNT (a_id, first_name, last_name, age, sex, weight, height, username, password, maintenance) " \
+					"VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')".format(count,fn,ln,age2,sex2,weight2,height2,user,pw,123)
 		db_conn.execute(statement)
 		db_conn.commit()
 	except Exception:
@@ -190,3 +191,20 @@ def get_preference(db_conn, a_id):
 		print("should be ok")
 		p = Preference(data)
 		return p
+
+def insert_workout(db_conn, d):
+	print("Insert a workout object into the database! Yay")
+	sqlInsert = "INSERT INTO Workout (W_ID, A_ID, Exercise1, Duration1, Intensity1, Desc1, Link1," \
+				"Exercise2, Duration2, Intensity2, Desc2, Link2," \
+				"Exercise3, Duration3, Intensity3, Desc3, Link3," \
+				"Exercise4, Duration4, Intensity4, Desc4, Link4," \
+				"Days,Weeks,Maintenance, Deficit) " \
+				"values ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}'," \
+				"'{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')".format(d['id'], d['a_id'],
+																				 d['ex1']['ex'], d['ex1']['dur'], d['ex1']['int'], d['ex1']['descr'], d['ex1']['img'],
+																				 d['ex2']['ex'], d['ex2']['dur'], d['ex2']['int'], d['ex2']['descr'], d['ex2']['img'],
+																				 d['ex3']['ex'], d['ex3']['dur'], d['ex3']['int'], d['ex3']['descr'], d['ex3']['img'],
+																				 d['ex4']['ex'], d['ex4']['dur'], d['ex4']['int'], d['ex4']['descr'], d['ex4']['img'],
+																				 d['days'], d['weeks'], d['mnt'], d['dfc'])
+	db_conn.execute(sqlInsert)
+	db_conn.commit()
