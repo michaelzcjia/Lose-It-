@@ -3,66 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Account</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Varela+Round" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="static/bootstrap-4.1.3-dist/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="static/css/style_createAccount.css">
+
+
+
 </head>
-<body background="static/create_account_background.png">
+<body >
     <div class="pageframe">
+
         <div class="addtask">
-            <form action="/addAccount">
+
 
                 <div class="welcome">
+                <div class="welText">
+                    <div class="navbar1"> <a href="#" class = "effect-1"> About</a> <a class = "effect-1" href="#">Careers</a></div>
+                    <img src="images/Group 17.png" class="logo">
 
-                    <div class="welText">
-
-                        <h1>Welcome to loseit!</h1></p>
-
-                        <div class="headDescr">
-                             <p>Let's get you all set up, so we can tailor make a plan to your preferences.</p>
-                             <p>Already have an account? (Sign in.) </p>
-                        </div>
-
-                    </div> 
-
-                    <img src="static/logo.png" class="logo" width = 12% height = 12% align="top">
-
-                </div>                                                                                
-
-
-
-
-
-
-                <div class="formTXT">
-                    <p>First Name</p>
-                    <input type="text" name="fname" size=30 class="add-textbox"><br>
-
-                    <p>Last Name</p>
-                    <input type="text" name="lname" size=30 class="add-textbox"><br>
-
-                    <p>Username</p>
-                    <input type="text" name="user" size=30 class="add-textbox"><br>
-
-                    <p>Password</p>
-                    <input type="text" name="password" size=30 class="add-textbox"><br>
-
-                    <p>Age</p>
-                    <input type="text" name="age" size=30 class="add-textbox"><br>
-
-                    <p>Sex</p>
-                    <input type="text" name="sex" size=30 class="add-textbox"><br>
-
-                    <p>Weight</p>
-                    <input type="text" name="weight" size=30 class="add-textbox"><br>
+                    <h1>Welcome to loseit!</h1>
+                    <div class="headDescr">
+                         <p>Let's get you all set up, so we can tailor make a plan to your preferences.</p>
+                         <p>Already have an account? <a href="#">(Sign in.)</a> </p>
+                    </div>
 
                 </div>
 
+
+
+                </div>
+            <form action="/addAccount">
+                <div class="formTXT">
+                    <div class="row">
+                        <div class="col">
+                            <p>First Name</p>
+                            <input class="form-control form-control-sm " type="text" name="fname" size=30><br>
+                        </div>
+
+                        <div class="col">
+                            <p>Last Name</p>
+                            <input class="form-control form-control-sm " type="text" name="lname" size=30><br>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <p>Email</p>
+                        <input class="form-control form-control-sm " type="email" name="user" size=30 placeholder="name@example.com">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <p>Password</p>
+                        <input class="form-control form-control-sm " type="password" name="password">
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <p>Age</p>
+                            <input class="form-control form-control-sm " type="number" name="age" size=30><br>
+                        </div>
+                        <div class="col">
+                            <p>Sex</p>
+                            <select class="form-control form-control-sm" id="exampleFormControlSelect1" name = "sex">
+                              <option>Select Sex</option>
+                              <option>Female</option>
+                              <option>Male</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <p>Weight (kg)</p>
+                            <input class="form-control form-control-sm " type="number" name="weight" size=30><br>
+                        </div>
+                        <div class="col">
+                            <p>Height (m)</p>
+                            <input class="form-control form-control-sm " type="number" name="height" size=30><br>
+                        </div>
+                    </div>
+                </div>
+
                 <br>
-                {%if userTaken%}
-                    <p>Sorry, this user already exists!</p>
-                {%endif%}
-                <input type="submit" class="add-button" value="Continue ">
+                <a href = '#'><input type="submit" class="add-button btn-5" value="Continue "></a>
             </form>
         </div>
+        <img src = "images/Group 23.png" class = "liftguy">
     </div>
 </body>
 </html>
