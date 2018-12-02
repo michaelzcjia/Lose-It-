@@ -137,7 +137,7 @@ def addPreferences():
     pref2 = request.args.get('pref2')
     avoid1 = request.args.get('avoid1')
     avoid2 = request.args.get('avoid2')
-    months = request.args.get('weeks')
+    weeks = request.args.get('weeks')
     days = request.args.get('days')
     intensity = request.args.get('intensity')
     nutrition = request.args.get('nutrition')
@@ -145,8 +145,8 @@ def addPreferences():
     db_conn = get_db_conn()
 
     #Call database function to insert the preferences into the database
-    if todo_db.addPreferences(db_conn,aId,pref1,pref2,avoid1,avoid2,months,days,intensity,nutrition,goal_weight):
-        return redirect("/generateWorkout") #if the user is successful in adding their preferences, it redirects to the view of the workout
+    if todo_db.addPreferences(db_conn,aId,pref1,pref2,avoid1,avoid2,weeks,days,intensity,nutrition,goal_weight):
+        return redirect("/generateWorkout") #if the user is successful in adding their preferences, it redirects to the generate workout function
     else:
         return render_template("/createWorkout.html", failPreference=True)
 
