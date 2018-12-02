@@ -8,7 +8,6 @@ class User:
     height = None
     maintenance = None
     has_workout = True
-
     #UPDATE THIS HSIT
 
     def __init__(self,attrs):
@@ -18,5 +17,5 @@ class User:
         self.age = attrs[3]
         self.sex = attrs[4]
         self.weight = attrs[5]
-        self.maintenance = attrs[6]
-        self.height = attrs[7]
+        self.height = attrs[6]
+        self.maintenance = attrs[7]

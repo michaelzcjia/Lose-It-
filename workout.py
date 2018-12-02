@@ -11,7 +11,6 @@ class Workout:
     workout["ex3"] = None
     workout["ex4"] = None
     workout["ex5"] = None
-    workout["ex6"] = None
     workout["days"] = None
     workout["months"] = None
     workout["mnt"] = None
@@ -28,7 +27,7 @@ class Workout:
         self.workout["mnt"] = attr[29]
         self.workout["dfc"] = attr[30]
 
-    def __init__(self, a_id):
+ def __init__(self, a_id):
         '''Get an existing workout'''
         self.workout["id"] = int(np.random.random()*10000)
         self.workout["a_id"] = a_id
