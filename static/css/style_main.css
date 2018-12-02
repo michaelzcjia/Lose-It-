@@ -6,26 +6,32 @@ table, caption, tbody, tfoot, thead, tr, th, td {
   border: 0;
 }
 
-.body{
-    background-position: top;
+body{
+    background: url("/static/images/mainbg.png");
+    background-size: 100%;
+    background-position: 50% 20%;
+    background-repeat: no-repeat;
 }
 
 p {
-    font-family: "Trebuchet MS", Helvetica, sans-serif;
-    font-size: 20px;
+    font-family: "Open Sans";
+    font-size: 18px;
+    color: #808080;
 
 }
 
 
 h1 {
-    font-family: "Trebuchet MS", Helvetica, sans-serif;
-    font-size: 45px;
+    font-family: "Varela Round";
+    font-weight: bold;
+    font-size: 60px;
 }
 
 h2 {
-    font-family: "Trebuchet MS", Helvetica, sans-serif;
-    font-size: 36px;
-    margin-bottom: 20px;
+    font-family: "Varela Round";
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 40px;
 }
 
 h3 {
@@ -37,51 +43,132 @@ h3 {
 
 .logo{
     display: inline-block;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    height: 140px;
 }
 
 .title{
+
     display: inline-block;
     position: relative;
-    left: 20px;
-    font-size: 60px;
+    left: 25px;
+    font-size: 80px;
 
 }
 
 .loginPrompt{
-    font-size: 36px;
-    margin-bottom: 30px;
+    color: white;
+    margin-bottom: 36px;
 }
 
 
 .introTxt{
-    width: 300px;
+
     line-height: 1.5;
-    margin-bottom: 80px;
+    margin-bottom: 120px;
+    width: 480px;
+    color: #383838;
+}
+
+input[type=text] {
+    background-color: #F0F8FF;
+}
+
+input[type=text]:focus {
+    border: 3px solid white;
+}
+
+input[type=password]{
+    background-color: #64a3ef;
+}
+
+input[type=password]:focus {
+    border: 3px solid #b7d7ff;
 }
 
 .description{
-    width: 400px;
+    width: 500px;
+    color: white;
     line-height: 1.5;
 }
 
 .logoHeadBlock{
-    background-color: #FFF8DC;
+
     position: relative;
     display: inline-block;
+    width: 500px;
 
 }
 
 .loginBlock{
+    margin-left: 400px;
+    position: absolute;
     display: inline-block;
+    top: 200px;
 }
 
 .add-textbox{
-    margin-bottom: 20px;
-    width: 26e  m;
+    margin-bottom: 28px;
+    width: 25em;
     height: 2em;
 
-    border-radius: 4px;
-    border: 2px solid #00008B;
+    border-radius: 13px;
+    border: 1px solid #00008B;
+    padding: 12px 20px;
 
+}
+
+.login-button{
+    display: inline-block;
+    position: relative;
+}
+
+.sign-up-button{
+    display: inline-block;
+    position: absolute;
+}
+
+.pageframe{
+    margin-left: 150px;
+    margin-top: 180px;
+}
+
+::-webkit-input-placeholder {
+  color: #495768;
+  font-size: 40px;
+  font-weight: bold;
+}
+::-moz-placeholder {
+  color: #495768;
+  font-size: 40px;
+}
+:-ms-input-placeholder {
+  color: #495768;
+  font-size: 40px;
+}
+::placeholder {
+  color: #495768;
+  font-size: 40px;
+}
+input[type=submit]{
+    background-color: white;
+    border: none;
+    color: #4190f2;
+    font-weight: bold;
+    padding: 12px 20px;
+    text-decoration: none;
+    margin: 4px 2px;
+    width: 12.5em;
+    height: 3em;
+    border-radius: 13px;
+    cursor: pointer;
+    opacity: -0.3;
+    transition: 0.3s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+
+.error-msg{
+    color: white;
+    font-weight: bold;
 }
