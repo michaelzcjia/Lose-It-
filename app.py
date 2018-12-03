@@ -120,7 +120,7 @@ def verifyLogin():
 
             #also add the preference data of goal and diet to the view workout template
 
-            return render_template("/viewWorkout.html",fname = curr_user.fname, exerciseList = exerciseList )  # for now it forces to this
+            return render_template("/createWorkout.html",fname = curr_user.fname, exerciseList = exerciseList )  # for now it forces to this
         else:
             return render_template("/createWorkout.html",fname = curr_user.fname)
 
@@ -132,12 +132,17 @@ def checkAccounts():
     todo_db.checkAccounts(get_db_conn())
     return render_template("/main.html")
 
+@app.route('/checkPreferences')
+def checkPreferences():
+    todo_db.checkPreferences(get_db_conn())
+    return render_template("/main.html")
+
 # Handles insertion of user preferences into the database. The preferences are submitted by a HTML form with an action:
 
 @app.route('/addPreferences', methods=['GET'])
 def addPreferences():
 
-    aId = curr_user.id #pulls the account id from the current user
+    aId = curr_user.id
     pref1 = request.args.get('pref1')
     pref2 = request.args.get('pref2')
     avoid1 = request.args.get('avoid1')
@@ -151,7 +156,7 @@ def addPreferences():
 
     #Call database function to insert the preferences into the database
     if todo_db.addPreferences(db_conn,aId,pref1,pref2,avoid1,avoid2,weeks,days,intensity,nutrition,goal_weight):
-        return redirect("/generateWorkout") #if the user is successful in adding their preferences, it redirects to the generate workout function
+        return render_template("/createWorkout.html") #if the user is successful in adding their preferences, it redirects to the generate workout function
     else:
         return render_template("/createWorkout.html", failPreference=True)
 
