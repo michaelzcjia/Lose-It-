@@ -53,8 +53,8 @@ def checkAccounts(db_conn):
 def addAccount(db_conn,fn,ln,age,sex,weight,height,user,pw):
 	sex2 = 'M' if sex == 'Male' else 'F'
 	age2 = int(age)
-	weight2 = int(weight)
-	height2 = int(height)
+	weight2 = float(weight)
+	height2 = float(height)
 	count = db_conn.execute("SELECT COUNT(*) FROM ACCOUNT")
 	try:
 		count = count.fetchone()
@@ -111,8 +111,8 @@ def get_user(db_conn, user, password):
 # I don't think pId is needed, if there are already account preferences for an account we can just update them.
 
 def addPreferences(db_conn, aId, p1, p2, a1, a2, weeks, days, intensity, nutrition, goalWeight):
-    weight2 = int(goalWeight)
-    weeks2 = int(weeks)
+    weight2 = float(goalWeight)
+    weeks2 = float(weeks)
     days2 = int(days)
     resultSet = db_conn.execute("SELECT * FROM Preference WHERE A_ID = ?", aId)  # determine if there are already preferences
     if(resultSet.fetchone()):
