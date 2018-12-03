@@ -1,9 +1,9 @@
 import sqlite3
 from user import User
 from workout import Workout
-
-# from preference import Preference
-# Add above later when M
+from preference import Preference
+#from preference import Preference
+#Add above later when M
 
 
 INITIALIZE_DB = """
@@ -53,32 +53,30 @@ def checkAccounts(db_conn):
     for i in results:
         print(i)
 
+def addAccount(db_conn,fn,ln,age,sex,weight,height,user,pw):
+	sex2 = 'M' if sex == 'Male' else 'F'
+	age2 = int(age)
+	weight2 = int(weight)
+	height2 = int(height)
+	count = db_conn.execute("SELECT COUNT(*) FROM ACCOUNT")
+	try:
+		count = count.fetchone()
+	except:
+		count = 0
+	try: #Added height after weight
+		statement = "INSERT INTO ACCOUNT (a_id, first_name, last_name, age, sex, weight, height, username, password, maintenance) " \
+					"VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')".format(count,fn,ln,age2,sex2,weight2,height2,user,pw,123)
+		db_conn.execute(statement)
+		db_conn.commit()
+	except Exception:
+		return False
+	return True
 
-def addAccount(db_conn, fn, ln, age, sex, weight, height, user, pw):
-    age2 = int(age)
-    weight2 = int(weight)
-    height2 = int(height)
-    count = db_conn.execute("SELECT COUNT(*) FROM ACCOUNT")
-    try:
-        count = count.fetchone()
-    except:
-        count = 0
-    try:  # Added height after weight
-        statement = "INSERT INTO ACCOUNT (a_id, first_name, last_name,age,sex,weight,height,username,password,maintenance) " \
-                    "VALUES ('{}','{}','{}',{},'{}',{},'{}','{}',{})".format(count, fn, ln, age2, sex, weight2, height2,
-                                                                             user, pw, 123)
-        db_conn.execute(statement)
-        db_conn.commit()
-    except Exception:
-        return False
-    return True
-
-
-def get_user(db_conn, user, password):
-    fill = (user, password,)
-    results = db_conn.execute('SELECT * FROM ACCOUNT WHERE USERNAME = ? AND PASSWORD = ?', fill)
-    curr_user = User(results.fetchone())
-    return curr_user
+def get_user(db_conn,user,password):
+	fill = (user,password,)
+	results = db_conn.execute('SELECT * FROM ACCOUNT WHERE USERNAME = ? AND PASSWORD = ?', fill)
+	curr_user = User(results.fetchone())
+	return curr_user
 
 
 # This function inserts the users entered preferences into the account
@@ -111,6 +109,7 @@ def addPreferences(db_conn, aId, p1, p2, a1, a2, weeks, days, intensity, nutriti
     except Exception:
         return False
     return True
+
 
 # Task Functions below
 
@@ -184,6 +183,15 @@ def get_workout(db_conn, a_id):
 
 
 # Pulls preference information from database to return a Preference object
+def get_exercises(db_conn):
+	sqlSelect = "SELECT * from Exercise"
+
+	results = db_conn.execute(sqlSelect)
+	print(type(results))
+	data = results.fetchall()
+	#print(data)
+	return data
+
 def get_preference(db_conn, a_id):
     sqlSelect = "SELECT * from Preference WHERE A_ID = '{}'".format(a_id)
 
@@ -198,3 +206,20 @@ def get_preference(db_conn, a_id):
         print("Preferences are litty fams")
         preference = Preference(preference_data)
         return preference
+
+def insert_workout(db_conn, d):
+	print("Insert a workout object into the database! Yay")
+	sqlInsert = "INSERT INTO Workout (W_ID, A_ID, Exercise1, Duration1, Intensity1, Desc1, Link1," \
+				"Exercise2, Duration2, Intensity2, Desc2, Link2," \
+				"Exercise3, Duration3, Intensity3, Desc3, Link3," \
+				"Exercise4, Duration4, Intensity4, Desc4, Link4," \
+				"Days,Weeks,Maintenance, Deficit) " \
+				"values ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}'," \
+				"'{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')".format(d['id'], d['a_id'],
+																				 d['ex1']['ex'], d['ex1']['dur'], d['ex1']['int'], d['ex1']['descr'], d['ex1']['img'],
+																				 d['ex2']['ex'], d['ex2']['dur'], d['ex2']['int'], d['ex2']['descr'], d['ex2']['img'],
+																				 d['ex3']['ex'], d['ex3']['dur'], d['ex3']['int'], d['ex3']['descr'], d['ex3']['img'],
+																				 d['ex4']['ex'], d['ex4']['dur'], d['ex4']['int'], d['ex4']['descr'], d['ex4']['img'],
+																				 d['days'], d['weeks'], d['mnt'], d['dfc'])
+	db_conn.execute(sqlInsert)
+	db_conn.commit()

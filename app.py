@@ -1,6 +1,8 @@
 # imports
 from flask import Flask, render_template, request, redirect, g
 import todo_db
+import workout
+from preference import Preference
 
 
 curr_user = 'Ratthew'
@@ -59,6 +61,8 @@ def addAccount():
     password = request.args.get('password')
     db_conn = get_db_conn()
 
+    print(fname,lname,age,sex,weight,height,user,password)
+
     #Performs a function where it looks for a row that contains the user above
     #If the function returns 0 counts, prompts user that login already exists and redirect back to page with error message (define UserTaken as TRUE)
     #If user doesnt exist, redirect to createworkoutplan page
@@ -66,7 +70,8 @@ def addAccount():
         global curr_user
         curr_user = todo_db.get_user(db_conn,user,password)
         return render_template('/createWorkout.html',fname = curr_user.fname)
-    return render_template("/createAccount.html",userTaken = True)
+    return render_template("/generateWorkout.html", userTaken = True)
+    #Need to change this back later to createaccount
 
 # Handles login task request. The task details are submitted by a HTML form with an action:
 # This function extracts the inputted login and password and calls the verify_login function
@@ -151,7 +156,6 @@ def addPreferences():
         return render_template("/createWorkout.html", failPreference=True)
 
 
-
 # Handles add task request. The task details are submitted by a HTML form with an action="/add".
 # This function extract the form field "title" and calls the app function add_task. NOTRELEVANT
 
@@ -188,6 +192,22 @@ def remove_task(task_id):
     db_conn = get_db_conn()
     todo_db.remove_task(db_conn, task_id)
     return redirect("/todo", code=307)
+
+@app.route('/generateWorkout')
+def generateWorkout():
+    a_id = curr_user.id
+
+    #JUST FOR TESTING PURPOSES
+    a_id = 1
+
+    db_conn = get_db_conn()
+    e_data = todo_db.get_exercises(db_conn)
+    wo = workout.Workout(a_id)
+    pref = todo_db.get_preference(db_conn, a_id)
+    wo_dic = wo.generate_workout(pref, curr_user, e_data)
+    todo_db.insert_workout(db_conn, wo_dic)
+    print("Workout inserted into database")
+    return
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
