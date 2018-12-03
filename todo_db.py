@@ -53,7 +53,6 @@ def checkAccounts(db_conn):
     for i in results:
         print(i)
 
-<<<<<<< HEAD
 def addAccount(db_conn,fn,ln,age,sex,weight,height,user,pw):
 	sex2 = 'M' if sex == 'Male' else 'F'
 	age2 = int(age)
@@ -78,7 +77,7 @@ def get_user(db_conn,user,password):
 	results = db_conn.execute('SELECT * FROM ACCOUNT WHERE USERNAME = ? AND PASSWORD = ?', fill)
 	curr_user = User(results.fetchone())
 	return curr_user
-=======
+
 def checkPreferences(db_conn):
     results = db_conn.execute("SELECT * FROM Preference")
     for i in results:
@@ -109,7 +108,6 @@ def get_user(db_conn, user, password):
     results = db_conn.execute('SELECT * FROM ACCOUNT WHERE USERNAME = ? AND PASSWORD = ?', fill)
     curr_user = User(results.fetchone())
     return curr_user
->>>>>>> Preferences
 
 
 # This function inserts the users entered preferences into the account
