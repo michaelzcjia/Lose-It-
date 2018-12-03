@@ -2,7 +2,7 @@
 from flask import Flask, render_template, request, redirect, g
 import todo_db
 import workout
-from preference import Preference
+import preference
 
 
 curr_user = 'Ratthew'

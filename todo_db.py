@@ -2,9 +2,6 @@ import sqlite3
 from user import User
 from workout import Workout
 from preference import Preference
-#from preference import Preference
-#Add above later when M
-
 
 INITIALIZE_DB = """
 	CREATE TABLE IF NOT EXISTS todo (
@@ -118,8 +115,6 @@ def addPreferences(db_conn, aId, p1, p2, a1, a2, weeks, days, intensity, nutriti
     weeks2 = int(weeks)
     days2 = int(days)
     resultSet = db_conn.execute("SELECT * FROM Preference WHERE A_ID = ?", aId)  # determine if there are already preferences
-    print("Aid ",aId)
-    print(resultSet)
     if(resultSet.fetchone()):
         count = 1
     else:
