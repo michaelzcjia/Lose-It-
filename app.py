@@ -71,7 +71,7 @@ def addAccount():
         curr_user = todo_db.get_user(db_conn,user,password)
         return render_template('/createWorkout.html',fname = curr_user.fname)
     return render_template("/generateWorkout.html", userTaken = True)
-    #Need to change this back later to createaccount
+    #TODO Need to change this back later to createaccount
 
 # Handles login task request. The task details are submitted by a HTML form with an action:
 # This function extracts the inputted login and password and calls the verify_login function
@@ -120,7 +120,7 @@ def verifyLogin():
 
             #also add the preference data of goal and diet to the view workout template
 
-            return render_template("/createWorkout.html",fname = curr_user.fname, exerciseList = exerciseList )  # for now it forces to this
+            return render_template("/viewWorkout.html",fname = curr_user.fname, exerciseList = exerciseList )  # for now it forces to this
         else:
             return render_template("/createWorkout.html",fname = curr_user.fname)
 
@@ -156,7 +156,7 @@ def addPreferences():
 
     #Call database function to insert the preferences into the database
     if todo_db.addPreferences(db_conn,aId,pref1,pref2,avoid1,avoid2,weeks,days,intensity,nutrition,goal_weight):
-        return render_template("/createWorkout.html") #if the user is successful in adding their preferences, it redirects to the generate workout function
+        return redirect("/generateWorkout.html") #if the user is successful in adding their preferences, it redirects to the generate workout function
     else:
         return render_template("/createWorkout.html", failPreference=True)
 
