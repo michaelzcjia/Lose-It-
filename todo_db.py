@@ -53,6 +53,10 @@ def checkAccounts(db_conn):
     for i in results:
         print(i)
 
+def checkPreferences(db_conn):
+    results = db_conn.execute("SELECT * FROM Preference")
+    for i in results:
+        print(i)
 
 def addAccount(db_conn, fn, ln, age, sex, weight, height, user, pw):
     age2 = int(age)
@@ -88,26 +92,25 @@ def addPreferences(db_conn, aId, p1, p2, a1, a2, weeks, days, intensity, nutriti
     weight2 = int(goalWeight)
     weeks2 = int(weeks)
     days2 = int(days)
-    resultSet = db_conn.execute(
-        "SELECT COUNT(*) FROM Preference WHERE A_ID = '{}'".format(aId))  # determine if there are already preferences
-    try:
-        count = resultSet.fetchone()
-    except:
+    resultSet = db_conn.execute("SELECT * FROM Preference WHERE A_ID = ?", aId)  # determine if there are already preferences
+    print("Aid ",aId)
+    print(resultSet)
+    if(resultSet.fetchone()):
+        count = 1
+    else:
         count = 0
-
     try:  # If there are no preferences for the current user, then insert the preferences into the database
         if (count == 0):
             statement = "INSERT INTO Preference (A_ID, Pref1, Pref2, Avoid1, Avoid2,Weeks, Days, Intensity,Nutrition, \
-			Goal_weight) "  "VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')" \
-                .format(aId, p1, p2, a1, a2, weeks2, days2, intensity, nutrition, weight2)
+			Goal_weight) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')".format(aId, p1, p2, a1, a2, weeks2, days2, intensity, nutrition, weight2)
             db_conn.execute(statement)
             db_conn.commit()
         else:  # If there are existing preferences, then we will update the values
             statement = "UPDATE Preference SET Pref1 = '{}', Pref2 = '{}', Avoid1 = '{}', Avoid2 = '{}',\
 			Weeks = '{}', Days = '{}', Intensity = '{}', Nutrition = '{}', Goal_weight = '{}' WHERE A_ID = '{}'" \
                 .format(p1, p2, a1, a2, weeks2, days2, intensity, nutrition, weight2, aId)
-        db_conn.execute(statement)
-        db_conn.commit()
+            db_conn.execute(statement)
+            db_conn.commit()
     except Exception:
         return False
     return True
