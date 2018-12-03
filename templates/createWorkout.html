@@ -3,84 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <title>Create a New Workout</title>
-    <link rel="stylesheet" type="text/css" href="static/css/workout.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Varela+Round" rel="stylesheet">
 
+    <link rel="stylesheet" type="text/css" href="static/bootstrap-4.1.3-dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="static/style_createAccount.css">
+    <script src="static/bootstrap-4.1.3-dist/js/jquery-3.3.1.min.js"></script>
+    <script src="static/bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="addPreferences">
-				<form action="/addPreferences">
+    <div class="pageframe">
+      <div class="leftside">
+        <div class="welcome">
+            <div class="welText">
+                <div class="navbar1"> <a href="#" class = "effect-1"> About</a> <a class = "effect-1" href="#">Careers</a></div>
+                <img src="images/Group 17.png" class="logo">
+
+                <h1>Tells us about yourself</h1>
+                <div class="headDescr">
+                     <p>By answering a few questions about your workout preferences, you can help our algorithms generate a workout
+                     best suited for your needs.</p>
+                     <p>Already have an account? <a href="#">(Sign in.)</a> </p>
+                </div>
+
+            </div>
+
+        </div>
+				<form action="/addPreferences" class = "formPref">
 
           <!-- Need to discuss the values with Michael-->
-                    Preferred Exercises<br><br>
-                    <select required name="pref1" placeholder="Pref1" class="add-textbox">
-                      <!-- still need to add the rest of the exercise-->
-                        <option value="Pushups">Push ups</option>
-                        <option value="Running">Running</option>
-                    </select>
+					          <p> Which excercises do you like?</p>
+                    <div class="row">
 
-                    <select required name="pref2" placeholder="Pref2" class="add-textbox">
-                      <!-- still need to add the rest of the exercise-->
-                      <option value="Walking">Walking</option>
-                      <option value="Situps">Sit ups</option>
-                    </select>
-                    <br><br>
+                        <div class="col">
+                            <select required class="form-control form-control-sm" name = "pref1">
+                              <option selected="selected" default disabled id="select"> Select Exercises you Prefer </option>
 
-                    Avoided Exercises<br><br>
+                              <option value = 'pushups'>hehehe</option>
+                              <option value = 'situps'>huhuhu</option>
+                            </select>
+                        </div>
 
-                    <select name="avoid1" placeholder="Avoid1" class="add-textbox">
-                      <!-- still need to add the rest of the exercise-->
-                      <option selected="selected" default disabled id="select_placeholder"> Select Exercises to Avoid </option>
-                      <option value="pushups">Push ups </option>
-                      <option value="situps">Sit ups </option>
-                    </select>
+                        <div class="col">
+                            <select class="form-control form-control-sm" name = "pref2">
+                              <option selected="selected" default disabled id="select_1"> Select Exercises you Prefer </option>
 
-                    <select name="avoid2" placeholder="Avoid2" class="add-textbox">
-                      <!-- still need to add the rest of the exercise-->
-                      <option value="pushups">Push ups </option>
-                      <option value="situps">Sit ups </option>
-                    </select>
-					          <br><br>
+                              <option value = 'pushups'>hehehe</option>
+                              <option value = 'situps'>huhuhu</option>
+                            </select>
+                        </div>
 
-                    User Effort<br><br>
+                    </div>
 
-                    <select name="weeks" placeholder="Weeks" class="add-textbox">
-                      <option value=1> 1lbs per Week </option>
-                      <option value=1.5> 1.5lbs per Week </option>
-                      <option value=2> 2lbs per Week </option>
-                    </select>
 
-                    <select name="days" placeholder="Days" class="add-textbox">
-                      <option value=2> 2 Days per Week </option>
-                      <option value=3> 3 Days per Week </option>
-                      <option value=4> 4 Days per Week </option>
-                    </select>
+                      <p> Which exercises <strong>don't</strong> you like?</p>
+                      <div class="row">
 
-                    <select name="intensity" placeholder="Intensity" class="add-textbox">
-                      <option value="2"> Low With Long Workouts </option>
-                      <option value="3"> Moderate With Moderate Length Workouts </option>
-                      <option value="4"> Long With Short Workouts </option>
-                    </select>
+                          <div class="col">
+                              <select required class="form-control form-control-sm" name = "avoid1">
+                                <option selected="selected" default disabled id="select_2"> Select Exercises to Avoid </option>
 
-                    <br><br>
+                                <option value = 'pushups'>hehehe</option>
+                                <option value = 'situps'>huhuhu</option>
+                              </select>
+                          </div>
 
-                    User Goals<br><br>
+                          <div class="col">
+                              <select class="form-control form-control-sm" name = "avoid2">
+                                <option selected="selected" default disabled id="select_3"> Select Exercises to Avoid </option>
+
+                                <option value = 'pushups'>hehehe</option>
+                                <option value = 'situps'>huhuhu</option>
+                              </select>
+                          </div>
+
+                      </div>
+
+
+
+                  <p> User Effort</p>
+                    <!-- radio button -->
+                  <div class="form-group">
+                    <p>How many lbs per week would you like to lose?</p>
+
+                     <div class="radio">
+                        <input id="radio-1" name="weeks" type="radio" checked value = 1>
+                        <label for="radio-1" class="radio-label">1lb per week</label>
+                      </div>
+
+                      <div class="radio">
+                        <input id="radio-2" name="weeks" type="radio" value = 1.5>
+                        <label  for="radio-2" class="radio-label">1.5lb per week</label>
+                      </div>
+
+                      <div class="radio">
+                        <input id="radio-3" name="weeks" type="radio" value = 2>
+                        <label for="radio-3" class="radio-label">2lb per week</label>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                    <p>How many days a week do you want to work out?</p>
+
+                     <div class="radio">
+                        <input id="adio-1" name="days" type="radio" checked value = 2>
+                        <label for="adio-1" class="radio-label">2 Days</label>
+                      </div>
+
+                      <div class="radio">
+                        <input id="adio-2" name="days" type="radio" value = 3>
+                        <label  for="adio-2" class="radio-label">3 Days</label>
+                      </div>
+
+                      <div class="radio">
+                        <input id="adio-3" name="days" type="radio" value = 4>
+                        <label for="adio-3" class="radio-label">4 Days</label>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                    <p>What type of workout do you enjoy?</p>
+
+                     <div class="radio">
+                        <input id="radi-1" name="intensity" type="radio" checked value = "low">
+                        <label for="radi-1" class="radio-label">Low but Long Workouts</label>
+                      </div>
+
+                      <div class="radio">
+                        <input id="radi-2" name="intensity" type="radio" value = "moderate">
+                        <label  for="radi-2" class="radio-label">Moderate</label>
+                      </div>
+
+                      <div class="radio">
+                        <input id="radi-3" name="intensity" type="radio" value = "long">
+                        <label for="radi-3" class="radio-label">Long, however Short Workouts</label>
+                      </div>
+                    </div>
+
+                    <p> What is your goal weight?</p>
+
+                    <!-- <div class="radio">
+                        <input id="radio-1" name="nutrition" type="radio" checked value = "low">
+                        <label for="radio-1" class="radio-label">Low but Long Workouts</label>
+                      </div>
+
+                      <div class="radio">
+                        <input id="radio-2" name="nutrition" type="radio" value = "moderate">
+                        <label  for="radio-2" class="radio-label">Moderate</label>
+                      </div>
+
+                      <div class="radio">
+                        <input id="radio-3" name="nutrition" type="radio" value = "long">
+                        <label for="radio-3" class="radio-label">Long, however Short Workouts</label>
+                      </div>
+                    </div> -->
 
                     <select name="nutrition" placeholder="Nutrition" class="add-textbox">
-                      <option value="1"> No Diet </option>
-                      <option value="2"> Slight Diet </option>
-                      <option value="3"> Diet </option>
+                      <option value="N"> No Diet </option>
+                      <option value="SD"> Slight Diet </option>
+                      <option value="D"> Diet </option>
                     </select>
 
-                    <input type="number" name="goal_weight" placeholder="Goal Weight" size="25" class="add-textbox">
-                    <br><br>
+                    <p>Goal Weight (lbs)</p>
+                    <input class="form-control form-control-sm " type="number" name="weight" size=30><br>
 
-                    {%if failPreference%}
-                        <p id="error_text">haha it failed</p>
-                    {%endif%}
-                    <input type="submit" class="add-button" value="Submit Preferences">
+                      <!-- {%if failPreference%}
+                          <p id="error_text">haha it failed</p>
+                      {%endif%} -->
+                    <input type="submit" class="add-button btn-5"  value="Submit Preferences">
 
 				</form>
 
-			</div>
+		  </div>
+        <img src = "images/Group 23.png" class = "liftguy">
+
+    </div>
 </body>
 </html>
