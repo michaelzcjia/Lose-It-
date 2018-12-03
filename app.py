@@ -72,6 +72,7 @@ def addAccount():
         return render_template('/createWorkout.html',fname = curr_user.fname)
     return render_template("/generateWorkout.html", userTaken = True)
     #TODO Need to change this back later to createaccount
+    #it's going to generate workout even though the account shouldnt exist already
 
 # Handles login task request. The task details are submitted by a HTML form with an action:
 # This function extracts the inputted login and password and calls the verify_login function
