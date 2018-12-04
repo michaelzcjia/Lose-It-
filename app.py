@@ -224,11 +224,9 @@ def generateWorkout():
         if wo.workout[exNum] != None:
             exerciseList.append(wo.workout[exNum])
 
-    #TODO undo
-    print(exerciseList)
 
     return render_template("/viewWorkout.html", fname=curr_user.fname,
-                           exerciseList=exerciseList)  # for now it forces to this
+                           exerciseList=exerciseList, weeks = wo["weeks"], cal = wo["dfc"], days = wo["days"])  # for now it forces to this
 
 
 if __name__ == '__main__':
