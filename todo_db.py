@@ -87,7 +87,7 @@ def addPreferences(db_conn, aId, p1, p2, a1, a2, weeks, days, intensity, nutriti
     weight2 = float(goalWeight)
     weeks2 = float(weeks)
     days2 = int(days)
-    resultSet = db_conn.execute("SELECT * FROM Preference WHERE A_ID = ?", aId)  # determine if there are already preferences
+    resultSet = db_conn.execute("SELECT * FROM Preference WHERE A_ID = '{}'".format(aId))  # determine if there are already preferences
     if(resultSet.fetchone()):
         count = 1
     else:
