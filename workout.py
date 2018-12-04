@@ -129,12 +129,13 @@ class Workout:
 
         #how many pounds per week do they want to lose?
         lb_per_week = pref.pref['lb_wk']
+        print(lb_per_week)
         wkly_def = 0
-        if lb_per_week == "1":
+        if lb_per_week == "1.0":
             wkly_def = 3500
         if lb_per_week == "1.5":
             wkly_def = 5200
-        if lb_per_week == "2":
+        if lb_per_week == "2.0":
             wkly_def = 7000
 
         #how willing they are to diet
