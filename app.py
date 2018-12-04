@@ -204,7 +204,7 @@ def generateWorkout():
     a_id = curr_user.id
 
     #JUST FOR TESTING PURPOSES
-    a_id = 1
+    #a_id = 1
 
     db_conn = get_db_conn()
     e_data = todo_db.get_exercises(db_conn)
@@ -213,7 +213,7 @@ def generateWorkout():
     wo_dic = wo.generate_workout(pref, curr_user, e_data)
     todo_db.insert_workout(db_conn, wo_dic)
     print("Workout inserted into database")
-    return
+    return render_template("/viewWorkout.html")
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
