@@ -15,7 +15,7 @@ html{
 
 
 body{
-    background: url("../static/images/mainbg.png");
+    background: url("../images/mainbg.png");
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: 50% 11%;

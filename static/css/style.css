@@ -31,7 +31,7 @@ a{
 .leftside{
     margin-top: 15vh;
     margin-left: 10vw;
-    width:60%;
+    width:50vw;
     float:left;
     margin-bottom: 20vh;
 }
@@ -103,10 +103,13 @@ input[type=text]{
     width: 30vw;
     margin-bottom: 20px;
 }
+.formPref{
 
+}
 .formPref p{
     margin-top:15px;
     font-size:14px;
+
 
 }
 .formTXT{
