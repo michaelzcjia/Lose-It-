@@ -21,6 +21,15 @@ a{
     text-decoration: none;
     color:  #383838;
 }
+
+.leftside{
+    margin-top: 15vh;
+    margin-left: 10vw;
+    width:60%;
+    float:left;
+    margin-bottom: 20vh;
+}
+
 .addtask{
     margin-top: 15vh;
     margin-left: 10vw;
