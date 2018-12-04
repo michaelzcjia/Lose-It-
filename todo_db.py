@@ -62,7 +62,7 @@ def addAccount(db_conn,fn,ln,age,sex,weight,height,user,pw):
 		count = 0
 	try: #Added height after weight
 		statement = "INSERT INTO ACCOUNT (a_id, first_name, last_name, age, sex, weight, height, username, password, maintenance) " \
-					"VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')".format(count,fn,ln,age2,sex2,weight2,height2,user,pw,123)
+					"VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')".format(count[0],fn,ln,age2,sex2,weight2,height2,user,pw,123)
 		db_conn.execute(statement)
 		db_conn.commit()
 	except Exception:

@@ -95,6 +95,7 @@ def verifyLogin():
 
             #get workout based on user a_id
             workoutObj = todo_db.get_workout(db_conn, curr_user.id)
+            print(workoutObj.workout, "@@@@@@@@@@@@@@@@")
 
             #get workout exercises to print into html page
             #print image:
@@ -105,7 +106,7 @@ def verifyLogin():
             #create exercise list to be printed
             exerciseList = []
 
-            for i in range(5):
+            for i in range(4):
                 j = i+1
                 exNum = "ex"+str(j)
                 #print(exNum)
@@ -157,7 +158,7 @@ def addPreferences():
 
     #Call database function to insert the preferences into the database
     if todo_db.addPreferences(db_conn,aId,pref1,pref2,avoid1,avoid2,weeks,days,intensity,nutrition,goal_weight):
-        return redirect("/generateWorkout.html") #if the user is successful in adding their preferences, it redirects to the generate workout function
+        return redirect("/generateWorkout") #if the user is successful in adding their preferences, it redirects to the generate workout function
     else:
         return render_template("/createWorkout.html", failPreference=True)
 
@@ -204,7 +205,7 @@ def generateWorkout():
     a_id = curr_user.id
 
     #JUST FOR TESTING PURPOSES
-    a_id = 1
+    #a_id = 1
 
     db_conn = get_db_conn()
     e_data = todo_db.get_exercises(db_conn)
@@ -213,7 +214,22 @@ def generateWorkout():
     wo_dic = wo.generate_workout(pref, curr_user, e_data)
     todo_db.insert_workout(db_conn, wo_dic)
     print("Workout inserted into database")
-    return
+    # create exercise list to be printed
+    exerciseList = []
+
+    for i in range(4):
+        j = i + 1
+        exNum = "ex" + str(j)
+        # print(exNum)
+        if wo.workout[exNum] != None:
+            exerciseList.append(wo.workout[exNum])
+
+    #TODO undo
+    print(exerciseList)
+
+    return render_template("/viewWorkout.html", fname=curr_user.fname,
+                           exerciseList=exerciseList)  # for now it forces to this
+
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
