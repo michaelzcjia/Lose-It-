@@ -80,33 +80,6 @@ def checkPreferences(db_conn):
     for i in results:
         print(i)
 
-def addAccount(db_conn, fn, ln, age, sex, weight, height, user, pw):
-    age2 = int(age)
-    weight2 = int(weight)
-    height2 = int(height)
-    count = db_conn.execute("SELECT COUNT(*) FROM ACCOUNT")
-    try:
-        count = count.fetchone()
-    except:
-        count = 0
-    try:  # Added height after weight
-        statement = "INSERT INTO ACCOUNT (a_id, first_name, last_name,age,sex,weight,height,username,password,maintenance) " \
-                    "VALUES ('{}','{}','{}',{},'{}',{},'{}','{}',{})".format(count, fn, ln, age2, sex, weight2, height2,
-                                                                             user, pw, 123)
-        db_conn.execute(statement)
-        db_conn.commit()
-    except Exception:
-        return False
-    return True
-
-
-def get_user(db_conn, user, password):
-    fill = (user, password,)
-    results = db_conn.execute('SELECT * FROM ACCOUNT WHERE USERNAME = ? AND PASSWORD = ?', fill)
-    curr_user = User(results.fetchone())
-    return curr_user
-
-
 # This function inserts the users entered preferences into the account
 # I don't think pId is needed, if there are already account preferences for an account we can just update them.
 
