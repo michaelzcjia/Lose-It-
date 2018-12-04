@@ -226,7 +226,7 @@ def generateWorkout():
 
 
     return render_template("/viewWorkout.html", fname=curr_user.fname,
-                           exerciseList=exerciseList, weeks = wo["weeks"], cal = wo["dfc"], days = wo["days"])  # for now it forces to this
+                           exerciseList=exerciseList, weeks = wo_dic["weeks"], cal = wo_dic["dfc"], days = wo_dic["days"])  # for now it forces to this
 
 
 if __name__ == '__main__':
