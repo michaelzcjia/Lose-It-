@@ -62,7 +62,7 @@ def addAccount(db_conn,fn,ln,age,sex,weight,height,user,pw):
 		count = 0
 	try: #Added height after weight
 		statement = "INSERT INTO ACCOUNT (a_id, first_name, last_name, age, sex, weight, height, username, password, maintenance) " \
-					"VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')".format(count,fn,ln,age2,sex2,weight2,height2,user,pw,123)
+					"VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')".format(count[0],fn,ln,age2,sex2,weight2,height2,user,pw,123)
 		db_conn.execute(statement)
 		db_conn.commit()
 	except Exception:
@@ -87,7 +87,7 @@ def addPreferences(db_conn, aId, p1, p2, a1, a2, weeks, days, intensity, nutriti
     weight2 = float(goalWeight)
     weeks2 = float(weeks)
     days2 = int(days)
-    resultSet = db_conn.execute("SELECT * FROM Preference WHERE A_ID = ?", aId)  # determine if there are already preferences
+    resultSet = db_conn.execute("SELECT * FROM Preference WHERE A_ID = '{}'".format(aId))  # determine if there are already preferences
     if(resultSet.fetchone()):
         count = 1
     else:

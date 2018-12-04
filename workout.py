@@ -104,6 +104,7 @@ class Workout:
             #Add exercise name
             self.workout[exs[i]]['ex'] = ex.Name.iloc[0]
             #Add exercise duration
+            print(ex_burn,ex.MET.iloc[0],user.weight)
             self.workout[exs[i]]['dur'] = int(60*(ex_burn / (ex.MET.iloc[0] * float(user.weight) * 0.453592 * 4)))
             #Add exercise description
             self.workout[exs[i]]['descr'] = ex.Description.iloc[0]
@@ -118,8 +119,8 @@ class Workout:
     def calc_cal(self, pref, user):
         "Returns the daily caloric burn"
         #Note: make sure to do type conversion (string -> float)
-        w = int(user.weight)
-        h = int(user.height)
+        w = float(user.weight)
+        h = float(user.height)
         a = int(user.age)
         s = user.sex
         m_cal = self.calc_maint(w,h,a,s)
@@ -128,12 +129,13 @@ class Workout:
 
         #how many pounds per week do they want to lose?
         lb_per_week = pref.pref['lb_wk']
+        print(lb_per_week)
         wkly_def = 0
-        if lb_per_week == "1":
+        if lb_per_week == "1.0":
             wkly_def = 3500
         if lb_per_week == "1.5":
             wkly_def = 5200
-        if lb_per_week == "2":
+        if lb_per_week == "2.0":
             wkly_def = 7000
 
         #how willing they are to diet
