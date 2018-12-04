@@ -31,7 +31,7 @@ a{
 .leftside{
     margin-top: 15vh;
     margin-left: 10vw;
-    width:50%;
+    width:60%;
     float:left;
     margin-bottom: 20vh;
 }
@@ -52,7 +52,9 @@ h1{
 }
 .pageframe{
     width: 100%;
-    height: 100%;
+    height: 100vh;
+
+
 }
 
 .headDescr{
@@ -65,7 +67,7 @@ h1{
     width:40vw;
 }
 
-
+}
 
 input[type=text]{
     margin-bottom:0px;
