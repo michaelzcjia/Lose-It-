@@ -18,10 +18,8 @@ table, caption, tbody, tfoot, thead, tr, th, td {
     /*background-color: yellow;*/
     border-bottom: 1px solid black;
     position: relative;
-    top: 0px;
-    margin-top: 15px;
-    width: 1500px;
-    left: 70px;
+    width: 90%  ;
+
 
 }
 .exIMG{
@@ -30,9 +28,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 
     display: inline-block;
     font-size: 72px;
-    width: 250px;
-    position: relative;
-    top: 0px;
+
 }
 
 
@@ -62,8 +58,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
     position: relative;
     display: inline-block;
     top: 0px;
-    font-size: 24px;
-    width: 800px;
+
     font-color: #A9A9A9;
     left: 30px;
     color: #778899;
@@ -71,84 +66,95 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 }
 
 p {
-    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-family: "Open Sans";
+    font-size: 13px;
 
 }
 
 
 h1 {
-    font-family: "Trebuchet MS", Helvetica, sans-serif;
-    font-size: 45px;
+   font-family: "Varela Round";
+    font-weight: bold;
+    font-size: 25px;
 }
 
 h2 {
-    font-family: "Trebuchet MS", Helvetica, sans-serif;
-    font-size: 36px;
+    font-family: "Open Sans";
+    font-size: 20px;
     margin-bottom: 20px;
 }
 
 h3 {
-    font-family: "Trebuchet MS", Helvetica, sans-serif;
+   font-family: "Open Sans";
     font-size: 36px;
     margin-bottom: 10px;
     color: #708090
 }
 
 .header{
-    position: relative;
-    left: 70px;
-    font-size: 24px;
-    margin-bottom: 40px;
-    display: block;
-    line-height: 3;
-    width: 1000px;
-
+    font-size: 15px;
 }
 
 .GDDescr {
-    position: relative;
-    left: 20px;
-    /*size of one line is 7*/
-    top: 0px;
+
     display: inline-block;
     color: #778899;
 }
 
 .GD{
-    position: relative;
     display: inline-block;
+    margin-bottom: 20px;
 }
 
 .welcome{
-    position: relative;
     margin-bottom: 0px;
-    width: 1500px;
-    left: 70px;
-
 }
 
 .welText{
     position: relative;
     display: inline-block;
-
-
 }
 
 .pageContent{
-    position: relative;
-    top: 70px;
+    margin-top: 8vh;
+    margin-left: 10vh;
 
-    margin-bottom: 70px;
 }
 
 .logo{
-   position: relative;
-   left: 30px;
-   display: inline-block;
+    height: 60px;
+    margin-left: 10px;
 }
 
 .extext{
-    position:relative;
-    left: 70px;
-    width: 1000px;
+
+}
+
+.navbar1{
+    display: inline-block;
+    margin-bottom: 40px;
+    font-family: Open Sans;
+    top: 1vh;
+}
+
+.navbar1 a{
+    margin-right: 30px;
+    text-decoration: none;
+    color:  #383838;
+}
+
+.navbar2 {
+    display: inline-block;
+    margin-right: 10vh;
+    float: top;
+    float: right;
+    margin-bottom: 40px;
+    font-family: Open Sans;
+    top: 1vh;
+}
+
+.navbar2 a{
+    margin-right: 30px;
+    text-decoration: none;
+    color:  #383838;
 }
