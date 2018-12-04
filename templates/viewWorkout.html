@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <title>View Workout</title>
     <link rel="stylesheet" type="text/css" href="../static/css/style_viewWorkout.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Varela+Round" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/css/style_viewWorkout.css">
 </head>
 <body>
     <div class="pageContent">
 
+        <div class="navbar1"> <a href="#" class = "effect-1"> About</a> <a class = "effect-1" href="#">Careers</a></div>
+        <div class="navbar2"> <a href='#' class = "effect-1"> Change Preferences</a> <a href='#' class = "effect-1">Logout</a></div>
         <div class="welcome">
             <div class="welText">
                 <h1>Hi {{ fname }}! This is your current workout plan. </h1>
             </div>
 
-            <img src="static/logo.png" class="logo" align="middle">
+            <img src="../static/images/Group 17.png" class="logo" align="middle">
         </div>
 
         <div class="header">
@@ -41,7 +45,7 @@
             <div class="exIMG">
                 <!-- PRINT GIF HERE-->
                 <!--<p>IMG</p>-->
-                <img src="static/pushup.gif" width=70% height=70%>
+                <img src="../static/pushup.gif" width=70% height=70%>
             </div>
 
 
@@ -56,18 +60,10 @@
                 </div>
 
             </div>
-
-
-
             <!-- To the Right -->
             <div class="exDescription">
-
                 <p>{{ exercise["descr"] }}</p>
-
             </div>
-
-
-
         </div>
         {% endfor %}
 
