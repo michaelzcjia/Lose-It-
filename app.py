@@ -37,7 +37,7 @@ def view_page():
     curr_user = 'HAHAHA'
     return render_template('ViewWorkout.html',curr_user = curr_user)
 
-"""" Todo list page. Accessible at <server-address>/todo
+""" Todo list page. Accessible at <server-address>/todo
 
 @app.route('/todo')
 def todo_list():
@@ -54,6 +54,7 @@ def addAccount():
     age = request.args.get('age')
     sex = request.args.get('sex')
     weight = request.args.get('weight')
+    height = request.args.get('height')
     user = request.args.get('user')
     password = request.args.get('password')
     db_conn = get_db_conn()
@@ -61,7 +62,7 @@ def addAccount():
     #Performs a function where it looks for a row that contains the user above
     #If the function returns 0 counts, prompts user that login already exists and redirect back to page with error message (define UserTaken as TRUE)
     #If user doesnt exist, redirect to createworkoutplan page
-    if todo_db.addAccount(db_conn,fname,lname,age,sex,weight,user,password):
+    if todo_db.addAccount(db_conn,fname,lname,age,sex,weight,height,user,password):
         global curr_user
         curr_user = todo_db.get_user(db_conn,user,password)
         return render_template('/createWorkout.html',fname = curr_user.fname)
@@ -118,7 +119,7 @@ def verifyLogin():
         else:
             return render_template("/createWorkout.html",fname = curr_user.fname)
 
-    return render_template("/main.html",failLogin=True)
+    return render_template("/main.html", failLogin=True)
 
 
 @app.route('/checkAccounts')
@@ -145,7 +146,7 @@ def addPreferences():
 
     #Call database function to insert the preferences into the database
     if todo_db.addPreferences(db_conn,aId,pref1,pref2,avoid1,avoid2,months,days,intensity,nutrition,goal_weight):
-        return render_template("/viewWorkout.html") #if the user is successful in adding their preferences, it redirects to the view of the workout
+        return redirect("/generateWorkout") #if the user is successful in adding their preferences, it redirects to the view of the workout
     else:
         return render_template("/createWorkout.html", failPreference=True)
 

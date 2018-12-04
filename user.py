@@ -5,6 +5,7 @@ class User:
     age = None
     sex = None
     weight = None
+    height = None
     maintenance = None
     has_workout = True
     #UPDATE THIS HSIT
@@ -16,4 +17,5 @@ class User:
         self.age = attrs[3]
         self.sex = attrs[4]
         self.weight = attrs[5]
-        self.maintenance = attrs[6]
+        self.height = attrs[6]
+        self.maintenance = attrs[7]
