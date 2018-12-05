@@ -35,7 +35,7 @@
                     <div class="row">
 
                         <div class="col">
-                            <select required class="form-control form-control-sm" name = "pref1">
+                            <select autofocus required class="form-control form-control-sm" name ="pref1">
                               <option selected="selected" default disabled id="select"> Select Exercises you Prefer </option>
 
                               <option value = 'Pushups'>Push Ups</option>
@@ -55,7 +55,7 @@
                         </div>
 
                         <div class="col">
-                            <select class="form-control form-control-sm" name = "pref2">
+                            <select required class="form-control form-control-sm" name = "pref2">
                               <option selected="selected" default disabled id="select_1"> Select Exercises you Prefer </option>
 
                               <option value = 'Pushups'>Push Ups</option>
@@ -99,7 +99,7 @@
                           </div>
 
                           <div class="col">
-                              <select class="form-control form-control-sm" name = "avoid2">
+                              <select required class="form-control form-control-sm" name = "avoid2">
                                   <option selected="selected" default disabled id="select_3"> Select Exercises to Avoid </option>
 
                                   <option value = 'Pushups'>Push Ups</option>
@@ -180,7 +180,7 @@
                       </div>
                     </div>
 
-                    <p> What is your goal weight?</p>
+                    <p> What is your diet preference?</p>
 
                     <!-- <div class="radio">
                         <input id="radio-1" name="nutrition" type="radio" checked value = "low">
@@ -198,14 +198,14 @@
                       </div>
                     </div> -->
 
-                    <select name="nutrition" placeholder="Nutrition" class="add-textbox">
+                    <select required name="nutrition" placeholder="Nutrition" class="add-textbox">
                       <option value="1"> No Diet </option>
                       <option value="2"> Slight Diet </option>
                       <option value="3"> Diet </option>
                     </select>
 
                     <p>Goal Weight (lbs)</p>
-                    <input class="form-control form-control-sm " type="number" name="goal_weight" size=30><br>
+                    <input required class="form-control form-control-sm " type="number" name="goal_weight" size=30 min="30"><br>
 
                       <!-- {%if failPreference%}
                           <p id="error_text">haha it failed</p>

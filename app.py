@@ -2,7 +2,8 @@
 from flask import Flask, render_template, request, redirect, g
 import todo_db
 import workout
-import preference
+import hashlib
+import preference #TODO is this used
 
 
 curr_user = 'Ratthew'
@@ -60,6 +61,7 @@ def addAccount():
     height = request.args.get('height')
     user = request.args.get('user')
     password = request.args.get('password')
+    password_hash = hashlib.md5(password.encode()).hexdigest()
     db_conn = get_db_conn()
 
     print(fname,lname,age,sex,weight,height,user,password)
@@ -67,11 +69,11 @@ def addAccount():
     #Performs a function where it looks for a row that contains the user above
     #If the function returns 0 counts, prompts user that login already exists and redirect back to page with error message (define UserTaken as TRUE)
     #If user doesnt exist, redirect to createworkoutplan page
-    if todo_db.addAccount(db_conn,fname,lname,age,sex,weight,height,user,password):
+    if todo_db.addAccount(db_conn,fname,lname,age,sex,weight,height,user,password_hash):
         global curr_user
-        curr_user = todo_db.get_user(db_conn,user,password)
+        curr_user = todo_db.get_user(db_conn,user,password_hash)
         return render_template('/createWorkout.html',fname = curr_user.fname)
-    return render_template("/generateWorkout.html", userTaken = True)
+    return render_template("/createAccount.html", userTaken = True)
     #TODO Need to change this back later to createaccount
     #it's going to generate workout even though the account shouldnt exist already
 
@@ -83,16 +85,17 @@ def verifyLogin():
     #get user and password from page connection
     user = request.args.get('user')
     password = request.args.get('password')
+    password_hash = hashlib.md5(password.encode()).hexdigest()
     db_conn = get_db_conn()
 
     #if login and password match
-    if todo_db.verifyLogin(db_conn,user,password):
+    if todo_db.verifyLogin(db_conn,user,password_hash):
         global curr_user
         workoutObj = None
-        curr_user = todo_db.get_user(db_conn,user,password)
+        curr_user = todo_db.get_user(db_conn,user,password_hash)
 
         #if user already has a workout
-        if curr_user.has_workout:
+        if curr_user.has_workout(db_conn):
 
             #get workout based on user a_id
             workoutObj = todo_db.get_workout(db_conn, curr_user.id)
