@@ -9,8 +9,22 @@
 <body>
     <div class="pageContent">
 
-        <div class="navbar1"> <a href="#" class = "effect-1"> About</a> <a class = "effect-1" href="#">Careers</a></div>
+        <div class="navbar1"> <a href="#" id="about" class = "effect-1"> About</a>  </div>
         <div class="navbar2"> <a href="/createWorkout" class = "effect-1"> Change Preferences</a> <a href='/' class = "effect-1">Logout</a></div>
+        <div id="myModal" class="modal">
+
+				  <!-- Modal content -->
+				  <div class="modal-content">
+					<span class="close">&times;</span>
+					<p><div class ="abouttitle">Welcome to loseit.io</div> <br>
+						Founded in 2018 in the MIE common room, loseit.io is an application designed to help users reach their weight loss goals. Everybody is different, and our team works to embrace differences by delivering personally tailored workout plans that cater to your excercise preferences. Our algorithms carefully account for each individuals likes and dislikes, ideal workout durations, intensity, and dieting habits.
+
+						<br><br>
+
+						We are passionate about promoting healthy lifestyles. For questions and concerns, email us
+						<a href="mailto:loseit916@gmail.com?Subject=Hello%20!" target="_blank">here.</a></p>
+				  </div>
+        </div>
         <div class="welcome">
             <div class="welText">
                 <h1>Hi {{ fname }}! This is your current workout plan. </h1>
@@ -35,7 +49,7 @@
         </div>
 
         <h2 class="extext">Exercises</h2>
-        <p> Complete these exercises {{ days }} per week to stay on track for your weight loss plans.</p>
+        <p> Complete these exercises {{ days }} times per week to stay on track for your weight loss plan.</p>
 
         <!-- Create 5 exercise boxes -->
 
@@ -69,6 +83,35 @@
         {% endfor %}
 
     </div>
+
+		<script>
+			// Get the modal
+			var modal = document.getElementById('myModal');
+
+			// Get the button that opens the modal
+			var btn = document.getElementById("about");
+
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close")[0];
+
+			// When the user clicks the button, open the modal
+			btn.onclick = function() {
+			    modal.style.display = "block";
+			}
+
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() {
+			    modal.style.display = "none";
+			}
+
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+			    if (event.target == modal) {
+			        modal.style.display = "none";
+			    }
+			}
+		</script>
+
 
 </body>
 </html>

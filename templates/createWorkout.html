@@ -15,10 +15,26 @@
       <div class="leftside">
         <div class="welcome">
             <div class="welText">
-                <div class="navbar1"> <a href="main.html" class = "effect-1"> About</a> <a class = "effect-1" href="#">Careers</a></div>
+                <div class="navbar1"><a class = "effect-1" href="/">Main</a> <a id = "about" href="#" class = "effect-1"> About</a> </div>
+
+
+                <div id = "myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <p><div class ="abouttitle">Welcome to loseit.io</div>
+                        <br>
+                        						Founded in 2018 in the MIE common room, loseit.io is an application designed to help users reach their weight loss goals. Everybody is different, and our team works to embrace differences by delivering personally tailored workout plans that cater to your excercise preferences. Our algorithms carefully account for each individuals likes and dislikes, ideal workout durations, intensity, and dieting habits.
+                            <br><br>
+                        We are passionate about promoting healthy lifestyles. For questions and concerns, email us
+                        <a href="mailto:loseit916@gmail.com?Subject=Hello%20!" target="_blank">here.</a>
+                        </p>
+                    </div>
+                </div>
+
                 <img src="../static/images/Group 17.png" class="logo">
 
-                <h1>Tells us about yourself</h1>
+
+                <h1>Tell us about yourself</h1>
                 <div class="headDescr">
                      <p>By answering a few questions about your workout preferences, you can help our algorithms generate a workout
                      best suited for your needs.</p>
@@ -30,7 +46,6 @@
         </div>
 				<form action="/addPreferences" class = "formPref">
 
-          <!-- Need to discuss the values with Michael-->
                     <p> Which excercises do you like?</p>
                     <div class="row">
 
@@ -45,7 +60,7 @@
                               <option value = 'Jumping_Jacks'>Jumping Jacks</option>
                               <option value = 'High_Knees'>High Knees</option>
                               <option value = 'Squat Jump'>Squat Jumps</option>
-                              <option value = 'Birpies'>Birpies</option>
+                              <option value = 'Birpies'>Burpees</option>
                               <option value = 'Squats'>Squats</option>
                               <option value = 'Lunges'>Lunges</option>
                               <option value = 'Stepups'>Step Ups</option>
@@ -65,7 +80,7 @@
                               <option value = 'Jumping_Jacks'>Jumping Jacks</option>
                               <option value = 'High_Knees'>High Knees</option>
                               <option value = 'Squat Jump'>Squat Jumps</option>
-                              <option value = 'Birpies'>Birpies</option>
+                              <option value = 'Birpies'>Burpees</option>
                               <option value = 'Squats'>Squats</option>
                               <option value = 'Lunges'>Lunges</option>
                               <option value = 'Stepups'>Step Ups</option>
@@ -90,7 +105,7 @@
                                   <option value = 'Jumping_Jacks'>Jumping Jacks</option>
                                   <option value = 'High_Knees'>High Knees</option>
                                   <option value = 'Squat Jump'>Squat Jumps</option>
-                                  <option value = 'Birpies'>Birpies</option>
+                                  <option value = 'Birpies'>Burpees</option>
                                   <option value = 'Squats'>Squats</option>
                                   <option value = 'Lunges'>Lunges</option>
                                   <option value = 'Stepups'>Step Ups</option>
@@ -109,7 +124,7 @@
                                   <option value = 'Jumping_Jacks'>Jumping Jacks</option>
                                   <option value = 'High_Knees'>High Knees</option>
                                   <option value = 'Squat Jump'>Squat Jumps</option>
-                                  <option value = 'Birpies'>Birpies</option>
+                                  <option value = 'Birpies'>Burpees</option>
                                   <option value = 'Squats'>Squats</option>
                                   <option value = 'Lunges'>Lunges</option>
                                   <option value = 'Stepups'>Step Ups</option>
@@ -182,22 +197,6 @@
 
                     <p> What is your diet preference?</p>
 
-                    <!-- <div class="radio">
-                        <input id="radio-1" name="nutrition" type="radio" checked value = "low">
-                        <label for="radio-1" class="radio-label">Low but Long Workouts</label>
-                      </div>
-
-                      <div class="radio">
-                        <input id="radio-2" name="nutrition" type="radio" value = "moderate">
-                        <label  for="radio-2" class="radio-label">Moderate</label>
-                      </div>
-
-                      <div class="radio">
-                        <input id="radio-3" name="nutrition" type="radio" value = "long">
-                        <label for="radio-3" class="radio-label">Long, however Short Workouts</label>
-                      </div>
-                    </div> -->
-
                     <select required name="nutrition" placeholder="Nutrition" class="add-textbox">
                       <option value="1"> No Diet </option>
                       <option value="2"> Slight Diet </option>
@@ -207,9 +206,6 @@
                     <p>Goal Weight (lbs)</p>
                     <input required class="form-control form-control-sm " type="number" name="goal_weight" size=30 min="30"><br>
 
-                      <!-- {%if failPreference%}
-                          <p id="error_text">haha it failed</p>
-                      {%endif%} -->
                     <input type="submit" class="add-button btn-5"  value="Submit Preferences">
 
 				</form>
@@ -218,5 +214,32 @@
         <img src = "../static/images/Group 16@2x.png" class = "liftguy">
 
     </div>
+    <script>
+			// Get the modal
+			var modal = document.getElementById('myModal');
+
+			// Get the button that opens the modal
+			var btn = document.getElementById("about");
+
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close")[0];
+
+			// When the user clicks the button, open the modal
+			btn.onclick = function() {
+			    modal.style.display = "block";
+			}
+
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() {
+			    modal.style.display = "none";
+			}
+
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+			    if (event.target == modal) {
+			        modal.style.display = "none";
+			    }
+			}
+		</script>
 </body>
 </html>

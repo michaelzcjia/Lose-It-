@@ -5,6 +5,7 @@
   transition-property: all;
     transition-duration: .2s;
   transition-timing-function: ease;
+  font-family: "Open Sans";
 
 }
 

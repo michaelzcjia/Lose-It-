@@ -20,20 +20,31 @@
         <div class="addtask">
 
 
-                <div class="welcome">
+            <div class="welcome">
                 <div class="welText">
-                    <div class="navbar1"> <a href="#" class = "effect-1"> About</a> <a class = "effect-1" href="#">Careers</a></div>
+                    <div class="navbar1"><a href="/" class="effect-1">Main</a> <a href="#" id ="about" class = "effect-1"> About</a> </div>
+                    <div id = "myModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <p><div class ="abouttitle">Welcome to loseit.io</div>
+                            <br>
+                                Founded in 2018 in the MIE common room, loseit.io is an application designed to help users reach their weight loss goals. Everybody is different, and our team works to embrace differences by delivering personally tailored workout plans that cater to your excercise preferences. Our algorithms carefully account for each individuals likes and dislikes, ideal workout durations, intensity, and dieting habits.
+                                <br><br>
+                                We are passionate about promoting healthy lifestyles. For questions and concerns, email us
+                                <a href="mailto:loseit916@gmail.com?Subject=Hello%20!" target="_blank">here.</a>
+                            </p>
+                        </div>
+                    </div>
+
                     <img src="../static/images/Group 17.png" class="logo">
 
                     <h1>Welcome to loseit!</h1>
-                    <div class="headDescr">
-                         <p>Let's get you all set up, so we can tailor make a plan to your preferences.</p>
-                         <p>Already have an account? <a href="#">(Sign in.)</a> </p>
+                        <div class="headDescr">
+                            <p>Let's get you all set up, so we can tailor make a plan to your preferences.</p>
+                            <p>Already have an account? <a href="#">(Sign in.)</a> </p>
+                        </div>
+
                     </div>
-
-                </div>
-
-
 
                 </div>
             <form action="/addAccount">
@@ -55,7 +66,7 @@
                         <input required class="form-control form-control-sm " type="email" name="user" size=30 placeholder="name@example.com">
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         {%if userTaken:%}
-                            <small id="emailTaken" class="form-text text-muted"> Sorry, that username is taken.</small>
+                            <small id="emailTaken" class="form-text"> An account already exists with that email.</small>
                         {% endif %}
                     </div>
 
@@ -97,5 +108,33 @@
         </div>
         <img src = "../static/images/Group 23.png" class = "liftguy">
     </div>
+<script>
+			// Get the modal
+			var modal = document.getElementById('myModal');
+
+			// Get the button that opens the modal
+			var btn = document.getElementById("about");
+
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close")[0];
+
+			// When the user clicks the button, open the modal
+			btn.onclick = function() {
+			    modal.style.display = "block";
+			}
+
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() {
+			    modal.style.display = "none";
+			}
+
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+			    if (event.target == modal) {
+			        modal.style.display = "none";
+			    }
+			}
+		</script>
+
 </body>
 </html>
