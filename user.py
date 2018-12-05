@@ -1,4 +1,4 @@
-import todo_db
+import loseit_db
 
 class User:
     id = None
@@ -24,7 +24,7 @@ class User:
 
     def has_workout(self, db_conn):
         '''Returns True if the user has a workout already'''
-        if todo_db.check_workout(db_conn, self.id):
+        if loseit_db.check_workout(db_conn, self.id):
             return True
         else:
             return False

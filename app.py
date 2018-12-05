@@ -1,6 +1,6 @@
 # imports
 from flask import Flask, render_template, request, redirect, g
-import todo_db
+import loseit_db
 import workout
 import hashlib
 import preference #TODO is this used
@@ -17,7 +17,7 @@ app = Flask(__name__)
 
 def get_db_conn():
     if not hasattr(g, "_db_conn"):
-        g._db_conn = todo_db.initialize_db(DATABASE_PATH)
+        g._db_conn = loseit_db.initialize_db(DATABASE_PATH)
     return g._db_conn
 
 # Welcome page. Accessible at <server-address>/
@@ -68,9 +68,9 @@ def addAccount():
     #Performs a function where it looks for a row that contains the user above
     #If the function returns 0 counts, prompts user that login already exists and redirect back to page with error message (define UserTaken as TRUE)
     #If user doesnt exist, redirect to createworkoutplan page
-    if todo_db.addAccount(db_conn,fname,lname,age,sex,weight,height,user,password_hash):
+    if loseit_db.addAccount(db_conn, fname, lname, age, sex, weight, height, user, password_hash):
         global curr_user
-        curr_user = todo_db.get_user(db_conn,user,password_hash)
+        curr_user = loseit_db.get_user(db_conn, user, password_hash)
         return render_template('/createWorkout.html',fname = curr_user.fname)
     return render_template("/createAccount.html", userTaken = True)
 
@@ -86,16 +86,16 @@ def verifyLogin():
     db_conn = get_db_conn()
 
     #if login and password match
-    if todo_db.verifyLogin(db_conn,user,password_hash):
+    if loseit_db.verifyLogin(db_conn, user, password_hash):
         global curr_user
         workoutObj = None
-        curr_user = todo_db.get_user(db_conn,user,password_hash)
+        curr_user = loseit_db.get_user(db_conn, user, password_hash)
 
         #if user already has a workout
         if curr_user.has_workout(db_conn):
 
             #get workout based on user a_id
-            workoutObj = todo_db.get_workout(db_conn, curr_user.id)
+            workoutObj = loseit_db.get_workout(db_conn, curr_user.id)
 
 
             #get workout exercises to print into html page
@@ -134,12 +134,12 @@ def verifyLogin():
 
 @app.route('/checkAccounts')
 def checkAccounts():
-    todo_db.checkAccounts(get_db_conn())
+    loseit_db.checkAccounts(get_db_conn())
     return render_template("/main.html")
 
 @app.route('/checkPreferences')
 def checkPreferences():
-    todo_db.checkPreferences(get_db_conn())
+    loseit_db.checkPreferences(get_db_conn())
     return render_template("/main.html")
 
 # Handles insertion of user preferences into the database. The preferences are submitted by a HTML form with an action:
@@ -160,7 +160,7 @@ def addPreferences():
     db_conn = get_db_conn()
 
     #Call database function to insert the preferences into the database
-    if todo_db.addPreferences(db_conn,aId,pref1,pref2,avoid1,avoid2,weeks,days,intensity,nutrition,goal_weight):
+    if loseit_db.addPreferences(db_conn, aId, pref1, pref2, avoid1, avoid2, weeks, days, intensity, nutrition, goal_weight):
         return redirect("/generateWorkout") #if the user is successful in adding their preferences, it redirects to the generate workout function
     else:
         return render_template("/createWorkout.html", failPreference=True)
@@ -175,11 +175,11 @@ def generateWorkout():
     #a_id = 1
 
     db_conn = get_db_conn()
-    e_data = todo_db.get_exercises(db_conn)
+    e_data = loseit_db.get_exercises(db_conn)
     wo = workout.Workout(a_id)
-    pref = todo_db.get_preference(db_conn, a_id)
+    pref = loseit_db.get_preference(db_conn, a_id)
     wo_dic = wo.generate_workout(pref, curr_user, e_data)
-    todo_db.insert_workout(db_conn, wo_dic)
+    loseit_db.insert_workout(db_conn, wo_dic)
     print("Workout inserted into database")
     # create exercise list to be printed
     exerciseList = []
