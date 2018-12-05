@@ -70,7 +70,7 @@ def addAccount():
         global curr_user
         curr_user = todo_db.get_user(db_conn,user,password)
         return render_template('/createWorkout.html',fname = curr_user.fname)
-    return render_template("/generateWorkout.html", userTaken = True)
+    return render_template("/createAccount.html", userTaken = True)
     #TODO Need to change this back later to createaccount
     #it's going to generate workout even though the account shouldnt exist already
 
