@@ -1,2 +1,2 @@
-# mie350_todo
-Basic todo list example project for MIE350
+# LoseIt.io
+A web application that generates a workout based on your personal preferences for exercises, intensity, duration and diet.
