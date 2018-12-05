@@ -126,7 +126,9 @@ def verifyLogin():
 
             #also add the preference data of goal and diet to the view workout template
 
-            return render_template("/viewWorkout.html",fname = curr_user.fname, exerciseList = exerciseList )  # for now it forces to this
+            return render_template("/viewWorkout.html",fname = curr_user.fname, exerciseList = exerciseList,
+                                   weeks=workoutObj.workout["weeks"], cal=workoutObj.workout["dfc"],
+                                   days=workoutObj.workout["days"])
         else:
             return render_template("/createWorkout.html",fname = curr_user.fname)
 
