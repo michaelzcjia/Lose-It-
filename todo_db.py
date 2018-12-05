@@ -197,3 +197,13 @@ def insert_workout(db_conn, d):
                                                                                  d['dfc'])
     db_conn.execute(sqlInsert)
     db_conn.commit()
+
+def check_workout(db_conn, aId):
+    '''Checks if there is a workout for the account, returns True if workout present'''
+
+    statement = "SELECT COUNT(*) FROM Preference WHERE A_ID = '{}'".format(aId)
+    result = db_conn.execute(statement)
+    if (result.fetchone()[0] == 0):
+        return False
+    else:
+        return True
