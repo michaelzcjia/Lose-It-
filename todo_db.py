@@ -137,12 +137,10 @@ def get_workout(db_conn, a_id):
     print(workout_data)
 
     if workout_data == None:
-        print('what the fucc')
         return False
     else:
-        print("should be ok")
-        workout = Workout(workout_data)
-        return workout
+        workout_plan = Workout(workout_data)
+        return workout_plan
 
 
 # Pulls preference information from database to return a Preference object
@@ -176,9 +174,11 @@ def insert_workout(db_conn, d):
     print("Insert a workout object into the database! Yay") #TODO remove this
 
     #Delete any existing workouts
+
     try:
-        sqlDelete = "DELETE FROM Workout(*) WHERE A_ID = '{}'".format(d['a_id'])
+        sqlDelete = "DELETE FROM Workout WHERE A_ID = '{}'".format(d['a_id'])
         db_conn.execute(sqlDelete)
+        db_conn.commit()
     #The print is just to get the code to continue working
     except:
         print("")

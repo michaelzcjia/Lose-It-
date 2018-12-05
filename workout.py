@@ -15,23 +15,29 @@ class Workout:
     workout["mnt"] = None
     workout["dfc"] = None
 
-    def __init__(self, attr):
-        '''Get an existing workout'''
-        self.workout["id"] = attr[0]
-        self.workout["a_id"] = attr[1]
-        for i, ex in enumerate(["ex1", "ex2", "ex3", "ex4"]):
-            self.workout[ex] = {"ex":attr[2+i+(4*i)],"dur":attr[3+i+(4*i)],"int":attr[4+i+(4*i)],"descr":attr[5+i+(4*i)], "img":attr[6+i+(4*i)]}
-        self.workout["days"] = attr[22]
-        self.workout["weeks"] = attr[23]
-        self.workout["mnt"] = attr[24]
-        self.workout["dfc"] = attr[25]
+
 
     def __init__(self, a_id):
-        '''Get an existing workout'''
-        self.workout["id"] = int(np.random.random()*10000)
-        self.workout["a_id"] = a_id
-        for i, ex in enumerate(["ex1", "ex2", "ex3", "ex4", "ex5"]):
-            self.workout[ex] = {"ex":None,"dur":None,"int":None,"descr":None, "img":None}
+
+        if (isinstance(a_id,tuple)):
+            attr = a_id
+            self.workout["id"] = attr[0]
+            self.workout["a_id"] = attr[1]
+            for i, ex in enumerate(["ex1", "ex2", "ex3", "ex4"]):
+                self.workout[ex] = {"ex": attr[2 + i + (4 * i)], "dur": attr[3 + i + (4 * i)],
+                                    "int": attr[4 + i + (4 * i)], "descr": attr[5 + i + (4 * i)],
+                                    "img": attr[6 + i + (4 * i)]}
+            self.workout["days"] = attr[22]
+            self.workout["weeks"] = attr[23]
+            self.workout["mnt"] = attr[24]
+            self.workout["dfc"] = attr[25]
+
+        else:
+            '''Creating new workout'''
+            self.workout["id"] = int(np.random.random()*10000)
+            self.workout["a_id"] = a_id
+            for i, ex in enumerate(["ex1", "ex2", "ex3", "ex4", "ex5"]):
+                self.workout[ex] = {"ex":None,"dur":None,"int":None,"descr":None, "img":None}
 
     def generate_workout(self, pref, user, e_data):
         pdic = pref.pref

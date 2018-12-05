@@ -38,7 +38,6 @@ def create_page():
 # Create Workout Plan Page. Accessible at <server-address>/
 @app.route('/viewWorkout')
 def view_page():
-    curr_user = 'HAHAHA'
     return render_template('ViewWorkout.html',curr_user = curr_user)
 
 """ Todo list page. Accessible at <server-address>/todo
@@ -74,8 +73,6 @@ def addAccount():
         curr_user = todo_db.get_user(db_conn,user,password_hash)
         return render_template('/createWorkout.html',fname = curr_user.fname)
     return render_template("/createAccount.html", userTaken = True)
-    #TODO Need to change this back later to createaccount
-    #it's going to generate workout even though the account shouldnt exist already
 
 # Handles login task request. The task details are submitted by a HTML form with an action:
 # This function extracts the inputted login and password and calls the verify_login function
@@ -99,7 +96,7 @@ def verifyLogin():
 
             #get workout based on user a_id
             workoutObj = todo_db.get_workout(db_conn, curr_user.id)
-            print(workoutObj.workout, "@@@@@@@@@@@@@@@@")
+
 
             #get workout exercises to print into html page
             #print image:
