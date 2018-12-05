@@ -51,6 +51,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
     margin: 0px;
     padding: 0px;
     display: inline-block;
+    font-family: "Varela Round";
 }
 
 .exDescription{
@@ -75,7 +76,7 @@ p {
 h1 {
    font-family: "Varela Round";
     font-weight: bold;
-    font-size: 25px;
+    font-size: 35px;
 }
 
 h2 {
@@ -99,11 +100,14 @@ h3 {
 
     display: inline-block;
     color: #778899;
+    font-size:15px;
 }
 
 .GD{
     display: inline-block;
     margin-bottom: 20px;
+    font-size:15px;
+
 }
 
 .welcome{

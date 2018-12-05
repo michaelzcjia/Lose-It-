@@ -10,7 +10,7 @@
     <div class="pageContent">
 
         <div class="navbar1"> <a href="#" class = "effect-1"> About</a> <a class = "effect-1" href="#">Careers</a></div>
-        <div class="navbar2"> <a href={{fname}} class = "effect-1"> Change Preferences</a> <a href='#' class = "effect-1">Logout</a></div>
+        <div class="navbar2"> <a href="/createWorkout" class = "effect-1"> Change Preferences</a> <a href='/' class = "effect-1">Logout</a></div>
         <div class="welcome">
             <div class="welText">
                 <h1>Hi {{ fname }}! This is your current workout plan. </h1>
@@ -24,6 +24,7 @@
             <div class="GD">
                 <p><b>Goal</b></p>
                 <p><b>Diet</b></p>
+
             </div>
 
             <div class="GDDescr">
@@ -34,6 +35,7 @@
         </div>
 
         <h2 class="extext">Exercises</h2>
+        <p> Complete these exercises {{ days }} per week to stay on track for your weight loss plans.</p>
 
         <!-- Create 5 exercise boxes -->
 
@@ -67,5 +69,6 @@
         {% endfor %}
 
     </div>
+
 </body>
 </html>

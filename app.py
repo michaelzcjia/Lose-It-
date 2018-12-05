@@ -13,6 +13,7 @@ DATABASE_PATH = "data.sqlite"
 app = Flask(__name__)
 
 #Returns path to the database
+
 def get_db_conn():
     if not hasattr(g, "_db_conn"):
         g._db_conn = todo_db.initialize_db(DATABASE_PATH)
@@ -163,42 +164,6 @@ def addPreferences():
         return render_template("/createWorkout.html", failPreference=True)
 
 
-# Handles add task request. The task details are submitted by a HTML form with an action="/add".
-# This function extract the form field "title" and calls the app function add_task. NOTRELEVANT
-
-@app.route('/add', methods=['GET'])
-def add_task():
-    task_title = request.args.get('title')
-    db_conn = get_db_conn()
-    task_list = todo_db.add_task(db_conn, task_title)
-    return redirect("/todo", code=307)
-
-# Handles requests to mark task as done.
-# The task id of the task to be marked as done is passed using the URL, e.g., /set_done/123 is a request to mark task 123 as done.
-# After the database is updated, we redirect the user back to the (updated) todo page
-@app.route('/set_done/<task_id>')
-def done(task_id):
-    db_conn = get_db_conn()
-    todo_db.set_done(db_conn, task_id)
-    return redirect("/todo", code=307)
-
-# Handles requests to mark task as not done.
-# The task id of the task to be marked as not done is passed using the URL, e.g., /set_not_done/123 is a request to mark task 123 as not done.
-# After the database is updated, we redirect the user back to the (updated) todo page
-@app.route('/set_not_done/<task_id>')
-def not_done(task_id):
-    db_conn = get_db_conn()
-    todo_db.set_not_done(db_conn, task_id)
-    return redirect("/todo", code=307)
-
-# Handles remove task request.
-# The task id of the task to be removed is passed using the URL, e.g., /remove_task/123 is a request to remove task 123.
-# After the task is removed from the database, we redirect the user back to the (updated) todo page
-@app.route('/remove_task/<task_id>')
-def remove_task(task_id):
-    db_conn = get_db_conn()
-    todo_db.remove_task(db_conn, task_id)
-    return redirect("/todo", code=307)
 
 @app.route('/generateWorkout')
 def generateWorkout():
