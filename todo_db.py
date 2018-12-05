@@ -173,7 +173,16 @@ def get_preference(db_conn, a_id):
 
 
 def insert_workout(db_conn, d):
-    print("Insert a workout object into the database! Yay")
+    print("Insert a workout object into the database! Yay") #TODO remove this
+
+    #Delete any existing workouts
+    try:
+        sqlDelete = "DELETE FROM Workout(*) WHERE A_ID = '{}'".format(d['a_id'])
+        db_conn.execute(sqlDelete)
+    #The print is just to get the code to continue working
+    except:
+        print("")
+
     sqlInsert = "INSERT INTO Workout (W_ID, A_ID, Exercise1, Duration1, Intensity1, Desc1, Link1," \
                 "Exercise2, Duration2, Intensity2, Desc2, Link2," \
                 "Exercise3, Duration3, Intensity3, Desc3, Link3," \
@@ -201,7 +210,7 @@ def insert_workout(db_conn, d):
 def check_workout(db_conn, aId):
     '''Checks if there is a workout for the account, returns True if workout present'''
 
-    statement = "SELECT COUNT(*) FROM Preference WHERE A_ID = '{}'".format(aId)
+    statement = "SELECT COUNT(*) FROM Workout WHERE A_ID = '{}'".format(aId)
     result = db_conn.execute(statement)
     if (result.fetchone()[0] == 0):
         return False

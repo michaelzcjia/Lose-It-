@@ -172,10 +172,10 @@ class Workout:
         kg_to_lb = 2.20462
         print(sex)
         if sex == "M":
-            activity_f = 1.2
+            activity_f = 1.5
             const_f = 5
         if sex == "F":
-            activity_f = 1.1
+            activity_f = 1.5
             const_f = -161
         cal = height * 6.25 + weight / kg_to_lb * 9.99 - age * 4.92 + const_f
         cal *= activity_f
