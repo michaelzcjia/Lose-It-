@@ -72,7 +72,7 @@ def addAccount():
     if loseit_db.addAccount(db_conn, fname, lname, age, sex, weight, height, user, password_hash):
         global curr_user
         curr_user = loseit_db.get_user(db_conn, user, password_hash)
-        return render_template('/createWorkout.html',fname = curr_user.fname,weight = curr_user.weight)
+        return render_template('/createWorkout.html',fname = curr_user.fname, weight = curr_user.weight)
     return render_template("/createAccount.html", userTaken = True)
 
 # Handles login task request. The task details are submitted by a HTML form with an action:
