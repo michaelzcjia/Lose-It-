@@ -103,7 +103,6 @@ def verifyLogin():
             #print image:
             # |exercise|duration|intensity|reps| x 6 exercises
 
-            #print("hello")
 
             #create exercise list to be printed
             exerciseList = []
@@ -111,16 +110,11 @@ def verifyLogin():
             for i in range(4):
                 j = i+1
                 exNum = "ex"+str(j)
-                #print(exNum)
                 if workoutObj.workout[exNum] != None:
                     exerciseList.append(workoutObj.workout[exNum])
 
             #good
             print(exerciseList)
-
-            #todo_db.printWorkout(db_conn)
-            #print('workoutObj: ',workoutObj.workout)
-
 
             #also add the preference data of goal and diet to the view workout template
 
@@ -189,7 +183,6 @@ def generateWorkout():
     for i in range(4):
         j = i + 1
         exNum = "ex" + str(j)
-        # print(exNum)
         if wo.workout[exNum] != None:
             exerciseList.append(wo.workout[exNum])
 

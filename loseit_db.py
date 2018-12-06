@@ -69,7 +69,6 @@ def addAccount(db_conn, fn, ln, age, sex, weight, height, user, pw):
         statement = "INSERT INTO ACCOUNT (a_id, first_name, last_name, age, sex, weight, height, username, password, maintenance) " \
                     "VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')".format(count[0], fn, ln, age2, sex2,
                                                                                         weight2, height2, user, pw, 123)
-        print(count[0], fn, ln, age2, sex2,weight2, height2, user, pw, 123)
         db_conn.execute(statement)
         db_conn.commit()
     except Exception:
@@ -127,7 +126,6 @@ def printWorkout(db_conn):
     results = db_conn.execute(sql)
     for i in results:
         print(i)
-    print("printed")
 
 
 def get_workout(db_conn, a_id):
@@ -149,9 +147,7 @@ def get_exercises(db_conn):
     sqlSelect = "SELECT * from Exercise"
 
     results = db_conn.execute(sqlSelect)
-    print(type(results))
     data = results.fetchall()
-    # print(data)
     return data
 
 
@@ -163,16 +159,13 @@ def get_preference(db_conn, a_id):
     print(preference_data)
 
     if preference_data == None:
-        print('it really do be like that sometimes')
         return False
     else:
-        print("Preferences are litty fams")
         preference = Preference(preference_data)
         return preference
 
 
 def insert_workout(db_conn, d):
-    print("Insert a workout object into the database! Yay") #TODO remove this
 
     #Delete any existing workouts
 
@@ -183,7 +176,6 @@ def insert_workout(db_conn, d):
     #The print is just to get the code to continue working
     except:
         print("")
-
     sqlInsert = "INSERT INTO Workout (W_ID, A_ID, Exercise1, Duration1, Intensity1, Desc1, Link1," \
                 "Exercise2, Duration2, Intensity2, Desc2, Link2," \
                 "Exercise3, Duration3, Intensity3, Desc3, Link3," \
