@@ -6,7 +6,7 @@ import hashlib
 import preference #TODO is this used
 
 
-curr_user = 'Ratthew'
+curr_user = 'Base_User'
 # Define a path for the database
 DATABASE_PATH = "data.sqlite"
 
@@ -33,7 +33,8 @@ def account_page():
 # Create Workout Plan Page. Accessible at <server-address>/
 @app.route('/createWorkout')
 def create_page():
-    return render_template('CreateWorkout.html')
+    global curr_user
+    return render_template('CreateWorkout.html', weight = curr_user.weight)
 
 # Create Workout Plan Page. Accessible at <server-address>/
 @app.route('/viewWorkout')
@@ -71,7 +72,7 @@ def addAccount():
     if loseit_db.addAccount(db_conn, fname, lname, age, sex, weight, height, user, password_hash):
         global curr_user
         curr_user = loseit_db.get_user(db_conn, user, password_hash)
-        return render_template('/createWorkout.html',fname = curr_user.fname)
+        return render_template('/createWorkout.html',fname = curr_user.fname,weight = curr_user.weight)
     return render_template("/createAccount.html", userTaken = True)
 
 # Handles login task request. The task details are submitted by a HTML form with an action:
@@ -127,7 +128,7 @@ def verifyLogin():
                                    weeks=workoutObj.workout["weeks"], cal=workoutObj.workout["dfc"],
                                    days=workoutObj.workout["days"])
         else:
-            return render_template("/createWorkout.html",fname = curr_user.fname)
+            return render_template("/createWorkout.html",fname = curr_user.fname, weight = curr_user.weight)
 
     return render_template("/main.html", failLogin=True)
 
@@ -147,6 +148,7 @@ def checkPreferences():
 @app.route('/addPreferences', methods=['GET'])
 def addPreferences():
 
+    global curr_user
     aId = curr_user.id
     pref1 = request.args.get('pref1')
     pref2 = request.args.get('pref2')
@@ -163,7 +165,7 @@ def addPreferences():
     if loseit_db.addPreferences(db_conn, aId, pref1, pref2, avoid1, avoid2, weeks, days, intensity, nutrition, goal_weight):
         return redirect("/generateWorkout") #if the user is successful in adding their preferences, it redirects to the generate workout function
     else:
-        return render_template("/createWorkout.html", failPreference=True)
+        return render_template("/createWorkout.html", failPreference=True, weight = curr_user.weight)
 
 
 
